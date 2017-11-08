@@ -1,0 +1,25 @@
+/**
+ * @description api相关路由
+ * @author      yq
+ * @date        2017-10-16 17:27:47
+ */
+
+import ApiList from '../../containers/api';
+
+export const API_DIR = {
+  id: '2',
+  title: '接口管理',
+  key: '2',
+  path: '/home/api',
+  icon: 'setting',
+  children: [
+    {
+      id: '3',
+      pid: '2',
+      title: '接口列表',
+      key: '3',
+      path: '/home/api/list',
+      component: ApiList,
+    },
+  ]
+};

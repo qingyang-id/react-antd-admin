@@ -1,0 +1,49 @@
+import React from 'react';
+import { Table, } from 'antd';
+import './List.less';
+
+const List = ({ ...tableProps }) => {
+
+  const columns = [
+    {
+      title: '编号',
+      dataIndex: 'id',
+      key: 'id',
+      width: 64,
+    },
+    {
+      title: '文件名称',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: true,
+    },
+    {
+      title: '更新时间',
+      dataIndex: 'updateTime',
+      key: 'updateTime',
+      sorter: true,
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      key: 'createTime',
+      sorter: true,
+    },
+  ];
+
+  return (
+    <div>
+      <Table
+        {...tableProps}
+        className='table'
+        bordered
+        scroll={{ x: 1250 }}
+        columns={columns}
+        simple
+        rowKey={record => record.id}
+      />
+    </div>
+  );
+};
+
+export default List;

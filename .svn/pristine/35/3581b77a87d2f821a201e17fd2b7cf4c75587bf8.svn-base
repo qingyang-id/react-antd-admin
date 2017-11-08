@@ -1,0 +1,14 @@
+// 全局 目录配置(输出: 导航菜单 / 路由)
+import { API_DIR } from '../containers/api/configDir'; // 接口管理
+const globalDir = [
+  {
+    id: '1',
+    title: '引导页',
+    key: '1',
+    path: '/home/guide',
+    icon: 'flag',
+    component: require('../containers/home/homeIndex').default,
+  },
+  API_DIR,
+];
+export default globalDir;

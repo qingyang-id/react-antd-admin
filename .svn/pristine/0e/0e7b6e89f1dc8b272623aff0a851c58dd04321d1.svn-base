@@ -1,0 +1,22 @@
+// 接口管理 - 目录配置
+import ApiList from './index';
+
+const API_DIR = {
+  id: '2',
+  title: '接口管理',
+  key: '2',
+  path: '/home/api',
+  icon: 'setting',
+  children: [
+    {
+      id: '3',
+      pid: '2',
+      title: '接口列表',
+      key: '3',
+      path: '/home/api/list',
+      component: ApiList,
+    },
+  ]
+};
+
+export { API_DIR };

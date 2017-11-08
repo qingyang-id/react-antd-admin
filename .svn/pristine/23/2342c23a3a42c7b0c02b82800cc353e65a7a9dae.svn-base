@@ -1,0 +1,109 @@
+/**
+ * @description 用户中心异步调度中心
+ * @author yq
+ * @date 2017/9/9 下午3:39
+ */
+import { race, put, call, take, fork, takeLatest } from 'redux-saga/effects';
+import { LOGIN, LOGOUT, LOGIN_SUCCESS, LOGIN_FAILURE } from '../types/user';
+import { UPDATE_STATE, HANDLE_SUCCESS } from '../types/app';
+import * as UserService from '../../services/user';
+import { setToken, removeToken, } from '../../utils/auth';
+import { push } from 'react-router-redux';
+import { queryURL } from '../../utils';
+
+//或者使用ES6 import
+import MD5 from 'blueimp-md5';
+
+
+function* doLogin({ account, password, }) {
+  // We send an action that tells Redux we're sending a request
+  yield put({ type: UPDATE_STATE, sending: true });
+  // We then try to register or log in the user, depending on the request
+  try {
+    const response = yield call(UserService.login, {
+      account,
+      password: MD5(password),
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    // If we get an error we send Redux the appropiate action and return
+    yield put({ type: LOGIN_FAILURE, payload: error });
+    return false;
+  } finally {
+    // When done, we tell Redux we're not in the middle of a request any more
+    yield put({ type: UPDATE_STATE, sending: false });
+  }
+}
+function* doLogout() {
+  // We tell Redux we're in the middle of a request
+  yield put({ type: UPDATE_STATE, sending: true });
+  // Similar to above, we try to log out by calling the `logout` function in the
+  // `auth` module. If we get an error, we send an appropiate action. If we don't,
+  // we return the response.
+  try {
+    // logout request
+    yield call(UserService.logout);
+    yield put({ type: UPDATE_STATE, sending: false });
+    // 清楚cookie
+    removeToken();
+    // 显示成功信息
+    yield put({ type: HANDLE_SUCCESS, payload: { msg: '退出成功' } });
+    // 跳转到登录页面
+    yield put(push('/login'));
+  } catch (error) {
+    yield put({ type: LOGIN_FAILURE, error });
+  } finally {
+    // When done, we tell Redux we're not in the middle of a request any more
+    yield put({ type: UPDATE_STATE, sending: false });
+  }
+}
+
+export function* logout() {
+  yield takeLatest(LOGOUT, doLogout);
+}
+
+export function* login() {
+  // Because sagas are generators, doing `while (true)` doesn't block our program
+  // Basically here we say "this saga is always listening for actions"
+  while (true) {
+    try {
+      // And we're listening for `LOGIN_REQUEST` actions and destructuring its payload
+      let request = yield take(LOGIN);
+      let { account, password } = request.data;
+      // A `LOGOUT` action may happen while the `authorize` effect is going on, which may
+      // lead to a race condition. This is unlikely, but just in case, we call `race` which
+      // returns the "winner", i.e. the one that finished first
+      let winner = yield race({
+        auth: call(doLogin, { account, password, }),
+        logout: take(LOGOUT)
+      });
+
+      // If `authorize` was the winner...
+      if (winner.auth) {
+        // ...we send Redux appropiate actions
+        yield put({ type: LOGIN_SUCCESS, payload: winner.auth.data }); // User is logged in (authorized)
+        // yield put({ type: RESET_LOGIN_FORM, }); // Clear form
+        // 设置cookie
+        setToken(winner.auth.data.token, {
+          path: '/',
+          expires: 10,
+        });
+        let redirect = queryURL('redirect');
+        redirect = ((redirect && redirect.indexOf('/login') === -1) && redirect) || '/home/guide';
+        // 跳转
+        if (redirect.indexOf('http') !== -1) window.location.href = decodeURIComponent(redirect);
+        else yield put(push(redirect));
+      }
+    } catch (error) {
+      console.error(error);
+      // If we get an error we send Redux the appropiate action and return
+      yield put({ type: LOGIN_FAILURE, payload: error });
+    }
+  }
+}
+
+export const userSagas = [
+  fork(login),
+  fork(logout),
+];

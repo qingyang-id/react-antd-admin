@@ -1,0 +1,28 @@
+/**
+ * @description server reducer
+ * @author      yq
+ * @date        2017-10-19 14:56:35
+ */
+
+import { UPDATE_STATE, SHOW_MODAL, HIDE_MODAL, } from '../types/server';
+
+const serverReducer = (state = {
+  currentItem: {}, // 当前选择的类目
+  modalVisible: false, // 模态框是否可见
+  modalType: 'create', // 模态框类型
+}, action) => {
+  switch (action.type) {
+    case UPDATE_STATE:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case SHOW_MODAL:
+      return { ...state, ...action.payload, modalVisible: true };
+    case HIDE_MODAL:
+      return { ...state, modalVisible: false };
+    default:
+      return state;
+  }
+};
+export default serverReducer;

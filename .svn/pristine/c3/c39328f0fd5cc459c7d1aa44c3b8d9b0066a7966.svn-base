@@ -1,0 +1,17 @@
+/**
+ * @description 服务管理服务类
+ * @author      yq
+ * @date        2017-10-19 13:21:22
+ */
+import { restartApiServerApi, } from '../config/api';
+import HttpUtil from '../utils/httpUtil';
+
+/**
+ * 重启API服务
+ * @returns {*}
+ */
+export const restartApiServer = () => {
+  return HttpUtil.send(Object.assign({
+    encode: false,
+  }, restartApiServerApi));
+};
