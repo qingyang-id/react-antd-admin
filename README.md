@@ -6,13 +6,6 @@
 
 [![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
-## 相关推荐
-[基于vue + vuex + less + ES6/7 + webpack + fetch + vue-router + store + element-ui实现的SPA后台管理系统模板](https://github.com/sosout/vue2-element)
-
-[Redux源码解析-Redux的架构](https://github.com/sosout/redux-source-analyse)
-
-[Immutable源码解析-Immutable的架构](https://github.com/sosout/immutable-source-analyse)
-
 
 ## 最新更新
 >  webpack版本升级2，同时引入Yarn缓存下载的每个包以及happypack利用了多进程，同时还利用缓存来使得rebuild 更快等
@@ -28,34 +21,22 @@
 
 >  编码时间：8:00——9:30, 下班时间——24:00，其他时间要工作。代码未优化，处女座代码必须要优化。由于代码延后，先向大家说声抱歉。您有什么问题可以私信我segmentfault。
 
-[线上demo](http://antd.sosout.com/)
-
 ## 关于我自己
 
->  使用技术： react + redux + immutable + less + ES6/7 + webpack2.0 + fetch + react-router + antd(1.x)
+>  使用技术： react + redux + saga + less + ES6/7 + webpack2.0 + axios + react-router4 + antd(1.x)
 
->  项目说明： 此项目是本人空余时间搭建的。希望大家提供宝贵的意见和建议，谢谢。
+>  项目说明： 此项目是根据开源的项目升级改造而成。希望大家提供宝贵的意见和建议，谢谢。
 
->  JS/React/Vue/Angular前端群： 599399742
-
->  邮&emsp;&emsp;&ensp;箱： sosout@139.com
-
->  个人网站： http://www.sosout.com/
-
->  个人博客： http://blog.sosout.com/
-
->  个人简书： http://www.jianshu.com/users/23b9a23b8849/latest_articles
-
->  segmentfault：https://segmentfault.com/u/sosout
+>  邮&emsp;&emsp;&ensp;箱： yq_sailor@163.com
 
 ### 下载
 
 ```
 # git clone
 
-git clone https://github.com/sosout/react-antd.git
+git clone https://github.com/Sailor20/react-antd-admin.git
 
-cd react-antd
+cd react-antd-admin
 ```
 
 ### 安装
@@ -69,12 +50,12 @@ yarn install
 ### 运行
 ```bush
 yarn run dev （开发版本，用于开发使用，热加载）
-  
+
 yarn run dist （发布生产版本，对代码进行混淆压缩，提取公共代码，分离css文件）
 ```
 
 ### 访问
-在浏览器地址栏输入[http://127.0.0.1:8888](http://127.0.0.1:8888)
+在浏览器地址栏输入[http://127.0.0.1:3006](http://127.0.0.1:3006)
 
 ### 目标功能
 - [x] 登录页面
@@ -95,7 +76,7 @@ yarn run dist （发布生产版本，对代码进行混淆压缩，提取公共
   	4. 整体布局;
 
   	5. 菜单映射路由(路由模式更改为浏览器模式);
-    
+
 # 性能优化
 
 ## 如何正确地在React中处理事件
@@ -224,7 +205,7 @@ class MyComponent extends React.Component {
         <ul>
             {this.state.list.map(
                 (item)=>(
-                <li className={this.state.current === item ? 'current':''} 
+                <li className={this.state.current === item ? 'current':''}
                 onClick={this.handleClick.bind(this, item)}>{item}
                 </li>
                 )
@@ -257,7 +238,7 @@ class MyComponent extends React.Component {
         <ul>
             {this.state.list.map(
                 (item)=>(
-                <li className={this.state.current === item ? 'current':''} 
+                <li className={this.state.current === item ? 'current':''}
                 onClick={this.handleClick.bind(undefined, item)}>{item}
                 </li>
                 )
@@ -291,7 +272,7 @@ class MyComponent extends React.Component {
         <ul>
             {this.state.list.map(
                 (item)=>(
-                <li className={this.state.current === item ? 'current':''} 
+                <li className={this.state.current === item ? 'current':''}
                 onClick={(event) => this.handleClick(item, event)}>{item}
                 </li>
                 )
@@ -377,6 +358,6 @@ pureRender很简单，就是把传进来的component的shouldComponentUpdate给�
 ```javascript
 function shallowCompare(instance, nextProps, nextState) {
   return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
-}  
+}
 ```
 一目了然。分别拿现在props&state和要传进来的props&state，用shallowEqual比一比，要是props&state都一样的话，就return false
