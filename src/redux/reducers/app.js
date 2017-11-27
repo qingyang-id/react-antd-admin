@@ -35,7 +35,6 @@ const initialState = {
           key: '11',
           path: '/home/apis',
           icon: 'setting',
-          ancestor: ['api'],
         },
         {
           id: '12',
@@ -70,6 +69,22 @@ const initialState = {
           key: '21',
           path: '/home/servers/logs',
           ancestor: ['thrift'],
+        },
+      ]
+    },
+    {
+      id: '30',
+      title: 'UI',
+      key: '30',
+      icon: 'rocket',
+      children: [
+        {
+          id: '31',
+          pid: '30',
+          title: '富文本',
+          key: '31',
+          path: '/home/ui/editor',
+          icon: 'rocket',
         },
       ]
     },

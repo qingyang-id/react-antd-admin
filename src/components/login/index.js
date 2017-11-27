@@ -68,7 +68,7 @@ class Login extends React.Component {
                 },
               ],
             })(<Input prefix={<Icon type="user" style={{ fontSize: 13 }} />}
-             size="large" placeholder="账号"/>)}
+             size="large" placeholder="管理员输入admin, 游客输入guest"/>)}
           </FormItem>
           <FormItem hasFeedback>
             {getFieldDecorator('password', {
@@ -79,7 +79,7 @@ class Login extends React.Component {
                 },
               ],
             })(<Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
-             size="large" type="password" placeholder="密码" />)}
+             size="large" type="password" placeholder="密码：123456" />)}
           </FormItem>
           <FormItem>
             {getFieldDecorator('remember', {

@@ -98,23 +98,23 @@ const Main = {
 };
 let apiHost = 'http://m.test.admin.com';
 let docHost = 'http://doc.admin.com';
-let ossHost = 'http://dlhr.oss-cn-hangzhou.aliyuncs.com';
+let ossHost = 'http://admin.oss-cn-hangzhou.aliyuncs.com';
 
 switch (process.env.NODE_ENV) {
   case 'production':
     apiHost = 'http://m.admin.com';
     docHost = 'http://doc.admin.com';
-    ossHost = 'http://dlhr.oss-cn-hangzhou.aliyuncs.com';
+    ossHost = 'http://admin.oss-cn-hangzhou.aliyuncs.com';
     break;
   case 'test':
     apiHost = 'http://m.test.admin.com';
     docHost = 'http://doc.admin.com';
-    ossHost = 'http://dlhr.oss-cn-hangzhou.aliyuncs.com';
+    ossHost = 'http://admin.oss-cn-hangzhou.aliyuncs.com';
     break;
   default:
     apiHost = 'http://m.test.admin.com';
     docHost = 'http://doc.admin.com';
-    ossHost = 'http://dlhr.oss-cn-hangzhou.aliyuncs.com';
+    ossHost = 'http://admin.oss-cn-hangzhou.aliyuncs.com';
 }
 export { apiHost, docHost, ossHost };
 export const platform = 'system';
@@ -122,7 +122,7 @@ export const version = '1.0.0';
 export const tokenKey = 'API-ADMIN-TOKEN';
 export const userKey = 'API-ADMIN-USER';
 export const systemPrefix = 'API-ADMIN';
-export const logoSrc = 'https://dlhr.oss-cn-hangzhou.aliyuncs.com/static/images/common/logo-500.png';
+export const logoSrc = 'https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg';
 export const logoText = 'Api Admin';
 export const apiPrefix = '/t/v1';
 export default Main;

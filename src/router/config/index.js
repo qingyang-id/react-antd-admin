@@ -5,5 +5,6 @@
  */
 import { THRIFT_DIR } from './thrift'; // thrift路由
 import { SERVER_DIR } from './server'; // 服务路由
+import { UI_DIR } from './ui'; // UI路由
 
-export { THRIFT_DIR, SERVER_DIR };
+export { THRIFT_DIR, SERVER_DIR, UI_DIR };
