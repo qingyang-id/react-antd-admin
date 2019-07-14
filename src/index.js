@@ -6,11 +6,13 @@ import { isLogin } from './utils/auth';
 import { configureStore, history } from './redux/store/index';
 import Root from './containers/base/Root';
 
+// global styles
+// import 'antd/dist/antd.less';
 import './style/index.less';
 import './style/lib/animate.css';
 import './app.less';
 
-import 'babel-polyfill';
+// import '@babel/polyfill';
 
 
 if (process.env.NODE_ENV === 'development') {
