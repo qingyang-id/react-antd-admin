@@ -51,9 +51,7 @@ yarn install
 ```bush
 yarn run start （开发版本，用于开发使用，热加载）
 
-yarn run build （生产环境打包构建）
-
-yarn run dist （发布生产版本，对代码进行混淆压缩，提取公共代码，分离css文件）
+yarn run build （发布生产版本，对代码进行混淆压缩，提取公共代码，分离css文件）
 ```
 
 ### 访问
