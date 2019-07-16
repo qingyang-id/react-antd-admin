@@ -40,23 +40,22 @@ const useTypeScript = fs.existsSync(paths.appTsConfig);
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
-// const sassRegex = /\.(scss|sass)$/;
-// const sassModuleRegex = /\.module\.(scss|sass)$/;
+const sassRegex = /\.(scss|sass)$/;
+const sassModuleRegex = /\.module\.(scss|sass)$/;
 const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function (webpackEnv) {
-  const isEnvDevelopment = webpackEnv === 'development';
+  const isEnvTest = webpackEnv === 'test';
   const isEnvProduction = webpackEnv === 'production';
+  const isEnvDevelopment = !isEnvProduction && !isEnvTest;
 
   // Webpack uses `publicPath` to determine where the app is being served from.
   // It requires a trailing slash, or the file assets will get an incorrect path.
   // In development, we always serve from the root. This makes config easier.
-  const publicPath = isEnvProduction
-    ? paths.servedPath
-    : isEnvDevelopment && '/';
+  const publicPath = isEnvDevelopment ? '/' : paths.servedPath;
   // Some apps do not use client-side routing with pushState.
   // For these, "homepage" can be set to "." to enable relative asset paths.
   const shouldUseRelativeAssetPaths = publicPath === './';
@@ -64,16 +63,14 @@ module.exports = function (webpackEnv) {
   // `publicUrl` is just like `publicPath`, but we will provide it to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
   // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
-  const publicUrl = isEnvProduction
-    ? publicPath.slice(0, -1)
-    : isEnvDevelopment && '';
+  const publicUrl = isEnvDevelopment ? '' : publicPath.slice(0, -1);
   // Get environment variables to inject into our app.
   const env = getClientEnvironment(publicUrl);
 
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
-      // isEnvDevelopment && require.resolve('style-loader'),
+      isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
         loader: MiniCssExtractPlugin.loader,
         options: shouldUseRelativeAssetPaths ? { publicPath: '../../' } : {},
@@ -127,15 +124,13 @@ module.exports = function (webpackEnv) {
       ? shouldUseSourceMap
         ? 'source-map'
         : false
-      : isEnvDevelopment && 'cheap-module-source-map',
+      : 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: [
       // We ship a few polyfills by default:
-      // require.resolve('./polyfills'),
-      '@babel/polyfill',
-      // 'core-js/stable',
-      // 'regenerator-runtime/runtime',
+      require.resolve('./polyfills'),
+      // '@babel/polyfill',
       // Include an alternative client for WebpackDevServer. A client's job is to
       // connect to WebpackDevServer by a socket and get notified about changes.
       // When you save a file, the client will either apply hot updates (in case
@@ -149,7 +144,7 @@ module.exports = function (webpackEnv) {
       isEnvDevelopment &&
       require.resolve('react-dev-utils/webpackHotDevClient'),
       // Errors should be considered fatal in development
-      require.resolve('react-error-overlay'),
+      isEnvDevelopment && require.resolve('react-error-overlay'),
       // Finally, this is your app's code:
       paths.appIndexJs,
       // We include the app code last so that if there is a runtime error during
@@ -158,31 +153,26 @@ module.exports = function (webpackEnv) {
     ].filter(Boolean),
     output: {
       // The build folder.
-      path: isEnvProduction ? paths.appBuild : undefined,
+      path: isEnvDevelopment ? undefined : paths.appBuild,
       // Add /* filename */ comments to generated require()s in the output.
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].js'
-        : isEnvDevelopment && 'static/js/bundle.js',
+      filename: isEnvDevelopment ? 'static/js/bundle.js' : 'static/js/[name].[contenthash:8].js',
       // TODO: remove this when upgrading to webpack 5
       futureEmitAssets: true,
       // There are also additional JS chunk files if you use code splitting.
-      chunkFilename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].chunk.js'
-        : isEnvDevelopment && 'static/js/[name].chunk.js',
+      chunkFilename: isEnvDevelopment ? 'static/js/[name].chunk.js' : 'static/js/[name].[contenthash:8].chunk.js',
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,
       // Point sourcemap entries to original disk location (format as URL on Windows)
-      devtoolModuleFilenameTemplate: isEnvProduction
-        ? info =>
+      devtoolModuleFilenameTemplate: isEnvDevelopment ?
+        info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
+        : info =>
           path
             .relative(paths.appSrc, info.absoluteResourcePath)
-            .replace(/\\/g, '/')
-        : isEnvDevelopment &&
-        (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
+            .replace(/\\/g, '/'),
     },
     optimization: {
       minimize: isEnvProduction,
@@ -307,7 +297,7 @@ module.exports = function (webpackEnv) {
       strictExportPresence: true,
       rules: [
         // Disable require.ensure as it's not a standard language feature.
-        // { parser: { requireEnsure: false } },
+        { parser: { requireEnsure: false } },
 
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
@@ -319,7 +309,6 @@ module.exports = function (webpackEnv) {
         //       options: {
         //         formatter: require.resolve('react-dev-utils/eslintFormatter'),
         //         eslintPath: require.resolve('eslint'),
-        //
         //       },
         //       loader: require.resolve('eslint-loader'),
         //     },
@@ -364,14 +353,14 @@ module.exports = function (webpackEnv) {
                       },
                     },
                   ],
-                  ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
+                  // ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
                 // directory for faster rebuilds.
                 cacheDirectory: true,
-                cacheCompression: isEnvProduction,
-                compact: isEnvProduction,
+                cacheCompression: !isEnvDevelopment,
+                compact: !isEnvDevelopment,
               },
             },
             // Process any JS outside of the app with Babel.
@@ -391,7 +380,7 @@ module.exports = function (webpackEnv) {
                   ],
                 ],
                 cacheDirectory: true,
-                cacheCompression: isEnvProduction,
+                cacheCompression: !isEnvDevelopment,
 
                 // If an error happens in a package, it's possible to be
                 // because it was compiled. Thus, we don't want the browser
@@ -434,37 +423,36 @@ module.exports = function (webpackEnv) {
             // Opt-in support for SASS (using .scss or .sass extensions).
             // By default we support SASS Modules with the
             // extensions .module.scss or .module.sass
-            // {
-            //   test: sassRegex,
-            //   exclude: sassModuleRegex,
-            //   use: getStyleLoaders(
-            //     {
-            //       importLoaders: 2,
-            //       sourceMap: isEnvProduction && shouldUseSourceMap,
-            //     },
-            //     'sass-loader'
-            //   ),
-            //   // Don't consider CSS imports dead code even if the
-            //   // containing package claims to have no side effects.
-            //   // Remove this when webpack adds a warning or an error for this.
-            //   // See https://github.com/webpack/webpack/issues/6571
-            //   sideEffects: true,
-            // },
+            {
+              test: sassRegex,
+              exclude: sassModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+                'sass-loader'
+              ),
+              // Don't consider CSS imports dead code even if the
+              // containing package claims to have no side effects.
+              // Remove this when webpack adds a warning or an error for this.
+              // See https://github.com/webpack/webpack/issues/6571
+              sideEffects: true,
+            },
             // Adds support for CSS Modules, but using SASS
             // using the extension .module.scss or .module.sass
-            // {
-            //   test: sassModuleRegex,
-            //   use: getStyleLoaders(
-            //     {
-            //       importLoaders: 2,
-            //       sourceMap: isEnvProduction && shouldUseSourceMap,
-            //       modules: true,
-            //       getLocalIdent: getCSSModuleLocalIdent,
-            //     },
-            //     'sass-loader'
-            //   ),
-            // },
-            // Parse less files and modify variables
+            {
+              test: sassModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: true,
+                  getLocalIdent: getCSSModuleLocalIdent,
+                },
+                'sass-loader'
+              ),
+            },
             // Opt-in support for LESS (using .less extensions).
             {
               test: lessRegex,
@@ -474,6 +462,7 @@ module.exports = function (webpackEnv) {
                 {
                   loader: require.resolve('less-loader'),
                   options: {
+                    modules: false,
                     javascriptEnabled: true,
                     modifyVars: { "@primary-color": "#001529" },
                   },

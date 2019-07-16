@@ -1,7 +1,4 @@
 /**
- * Created by 叶子 on 2017/8/1.
- */
-/**
  * Created by 叶子 on 2017/7/31.
  */
 import React, { Component } from 'react';

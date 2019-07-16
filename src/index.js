@@ -1,4 +1,6 @@
 // 根文件
+// import "core-js/stable";
+// import "regenerator-runtime/runtime";
 import React from 'react';
 import { render } from 'react-dom';
 
@@ -8,8 +10,9 @@ import Root from './containers/base/Root';
 
 // global styles
 // import 'antd/dist/antd.less';
-import './style/index.less';
 import './style/lib/animate.css';
+import './style/antd/index.less';
+import './style/index.less';
 import './app.less';
 
 // import '@babel/polyfill';

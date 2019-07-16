@@ -9,7 +9,7 @@
       "@babel/plugin-transform-runtime",
       {
         "corejs": false,
-        "helpers": true,
+        "helpers": false,
         "regenerator": true,
         "useESModules": false
       }
@@ -30,6 +30,7 @@
     "@babel/plugin-proposal-numeric-separator",
     "@babel/plugin-proposal-throw-expressions",
     "@babel/plugin-transform-modules-commonjs",
+    "react-loadable/babel",
     [
       "import",
       {
