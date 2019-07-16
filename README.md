@@ -1,4 +1,4 @@
-# react-antd(新版后台很快就与大家见面了)
+# react-antd-admin(新版后台很快就与大家见面了)
 [![React Native](https://img.shields.io/badge/react-^15.3.2-brightgreen.svg?style=flat-square)](https://github.com/facebook/react)
 [![Redux](https://img.shields.io/badge/redux-^4.4.5-yellowgreen.svg?style=flat-square)](https://github.com/reactjs/redux)
 [![Redux Immutablejs](https://img.shields.io/badge/immutablejs-^0.0.8-orange.svg?style=flat-square)](https://github.com/indexiatech/redux-immutablejs)
@@ -8,14 +8,14 @@
 
 
 ## 最新更新
->  webpack版本升级2，同时引入Yarn缓存下载的每个包以及happypack利用了多进程，同时还利用缓存来使得rebuild 更快等
+>  webpack版本升级4, babel升级到7，antd升级到3，同时引入Yarn缓存下载的每个包以及happypack利用了多进程，同时还利用缓存来使得rebuild 更快等
 
 >  Redux使用调整
 
 > 路由模式更改为浏览器模式
 
 ## 前言
->  本工程主要基于react + redux + immutable + less + ES6/7 + webpack2.0 + fetch + react-router + antd(1.x)实现的SPA后台管理系统模板。
+>  本工程主要基于react + redux + immutable + less + ES6/7 + webpack4 + babel7 + fetch + react-router + antd3实现的SPA后台管理系统模板。
 
 >  如果觉得不错的话，请star一下吧 😊
 
@@ -23,18 +23,18 @@
 
 ## 关于我自己
 
->  使用技术： react + redux + saga + less + ES6/7 + webpack2.0 + axios + react-router4 + antd(1.x)
+>  使用技术： react + redux + saga + less + ES6/7 + webpack4 + axios + react-router4 + antd3
 
 >  项目说明： 此项目是根据开源的项目升级改造而成。希望大家提供宝贵的意见和建议，谢谢。
 
->  邮&emsp;&emsp;&ensp;箱： yq_sailor@163.com
+>  邮&emsp;&emsp;&ensp;箱： yqsailor@163.com
 
 ### 下载
 
 ```
 # git clone
 
-git clone https://github.com/Sailor20/react-antd-admin.git
+git clone https://github.com/yqsailor/react-antd-admin.git
 
 cd react-antd-admin
 ```
@@ -49,13 +49,15 @@ yarn install
 ```
 ### 运行
 ```bush
-yarn run dev （开发版本，用于开发使用，热加载）
+yarn run start （开发版本，用于开发使用，热加载）
+
+yarn run build （生产环境打包构建）
 
 yarn run dist （发布生产版本，对代码进行混淆压缩，提取公共代码，分离css文件）
 ```
 
 ### 访问
-在浏览器地址栏输入[http://127.0.0.1:3006](http://127.0.0.1:3006)
+在浏览器地址栏输入[http://127.0.0.1:3601](http://127.0.0.1:3601)
 
 ### 目标功能
 - [x] 登录页面
@@ -65,6 +67,14 @@ yarn run dist （发布生产版本，对代码进行混淆压缩，提取公共
 - [ ] 后台系统常用场景会逐个完善
 
 ####历史更新
+  *2019.07.16*
+
+  	1. webpack版本升级(webpack4)；
+
+  	2. babel版本升级(babel4);
+
+  	3. antd版本升级(antd3);
+  	
   *2017.02.20*
 
   	1. 初始化项目目录;
