@@ -47,7 +47,7 @@ class Main extends Component {
           <Col span={24}>
             <Card title="项目前言" bordered={false}>
               <p>本工程主要基于react + redux + saga  + less + ES6/7 + webpack + axios + react-router +
-                antd(1.x)实现的SPA后台管理系统模板。</p>
+                antd实现的SPA后台管理系统模板。</p>
               <p>目前项目尚未开发完全，敬请谅解。</p>
               <p>项目持续迭代中......。</p>
             </Card>
