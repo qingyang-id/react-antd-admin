@@ -1,8 +1,8 @@
 # react-antd-admin(新版后台很快就与大家见面了)
-[![React Native](https://img.shields.io/badge/react-^15.3.2-brightgreen.svg?style=flat-square)](https://github.com/facebook/react)
+[![React Native](https://img.shields.io/badge/react-^15.x-brightgreen.svg?style=flat-square)](https://github.com/facebook/react)
 [![Redux](https://img.shields.io/badge/redux-^4.4.5-yellowgreen.svg?style=flat-square)](https://github.com/reactjs/redux)
 [![Redux Immutablejs](https://img.shields.io/badge/immutablejs-^0.0.8-orange.svg?style=flat-square)](https://github.com/indexiatech/redux-immutablejs)
-[![Ant Design](https://img.shields.io/badge/ant--design-^2.7.2-yellowgreen.svg?style=flat-square)](https://github.com/ant-design/ant-design)
+[![Ant Design](https://img.shields.io/badge/ant--design-^3.x-yellowgreen.svg?style=flat-square)](https://github.com/ant-design/ant-design)
 
 [![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
