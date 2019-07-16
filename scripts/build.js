@@ -1,17 +1,16 @@
 'use strict';
 
-var configFactory;
 if (process.env.NODE_ENV === 'production') {
   // Do this as the first thing so that any code reading it knows the right env.
   process.env.BABEL_ENV = 'production';
   process.env.NODE_ENV = 'production';
-  configFactory = require('../config/webpack.config.prod');
 } else {
   // Do this as the first thing so that any code reading it knows the right env.
   process.env.BABEL_ENV = 'test';
   process.env.NODE_ENV = 'test';
-  configFactory = require('../config/webpack.config.test');
 }
+
+var configFactory = require('../config/webpack.config');
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
@@ -53,7 +52,7 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 }
 
 // Generate configuration
-const config = configFactory('production');
+const config = configFactory(process.env.NODE_ENV);
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.

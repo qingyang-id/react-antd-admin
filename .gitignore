@@ -70,3 +70,6 @@ apiDocs/
 
 .vscode
 *.iml
+
+# webpack babel
+dist
