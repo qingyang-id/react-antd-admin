@@ -1,11 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import freeze from 'redux-freeze';
 // import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import * as rootReducer from '../reducers/index';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory as createHistory } from 'history';
 import saga from '../sagas';
 
 const history = createHistory();
@@ -29,7 +29,7 @@ const enhancer = compose(
 // 3. 配置 combine: 组合 redux 与 router
 const combine = combineReducers({
   ...rootReducer,
-  router: routerReducer
+  router: connectRouter(history)
 });
 
 // 4. 配置 store; 判断 dev环境下浏览器是否配有 redux-devtools 工具

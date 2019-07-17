@@ -1,7 +1,8 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 
-import { ConnectedRouter } from 'react-router-redux' // push
+// import { ConnectedRouter } from 'react-router-redux' // push
+import { ConnectedRouter } from 'connected-react-router'
 
 import { renderRoutes } from 'react-router-config'
 

@@ -1,4 +1,5 @@
 // 根文件
+// import 'raf/polyfill' // fix requestAnimationFrame issue with polyfill
 // import "core-js/stable";
 // import "regenerator-runtime/runtime";
 import React from 'react';

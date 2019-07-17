@@ -7,7 +7,8 @@ import { race, put, call, take, fork, takeLatest } from 'redux-saga/effects';
 import { LOGIN, LOGOUT, UPDATE_PASSWORD, LOGIN_SUCCESS, } from '../types/user';
 import { UPDATE_STATE, HANDLE_SUCCESS, HANDLE_FAILED } from '../types/app';
 import * as UserService from '../../services/user';
-import { push } from 'react-router-redux';
+// import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import { queryURL } from '../../utils';
 
 //或者使用ES6 import

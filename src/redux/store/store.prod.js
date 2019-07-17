@@ -1,9 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 // import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import * as rootReducer from '../reducers/index';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory as createHistory } from 'history';
 import saga from '../sagas';
 
 const history = createHistory();
@@ -19,7 +19,7 @@ const middleware = [
 // 2. 配置 combine: 组合 redux 与 router
 const combine = combineReducers({
   ...rootReducer,
-  router: routerReducer
+  router: connectRouter(history)
 });
 
 // 配置 store
