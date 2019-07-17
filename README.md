@@ -1,8 +1,10 @@
 # react-antd-admin(新版后台很快就与大家见面了)
-[![React Native](https://img.shields.io/badge/react-^15.x-brightgreen.svg?style=flat-square)](https://github.com/facebook/react)
-[![Redux](https://img.shields.io/badge/redux-^4.4.5-yellowgreen.svg?style=flat-square)](https://github.com/reactjs/redux)
+[![React Native](https://img.shields.io/badge/react-^16.x-brightgreen.svg?style=flat-square)](https://github.com/facebook/react)
+[![Redux](https://img.shields.io/badge/redux-^4.x-yellowgreen.svg?style=flat-square)](https://github.com/reactjs/redux)
 [![Redux Immutablejs](https://img.shields.io/badge/immutablejs-^0.0.8-orange.svg?style=flat-square)](https://github.com/indexiatech/redux-immutablejs)
-[![Ant Design](https://img.shields.io/badge/ant--design-^3.x-yellowgreen.svg?style=flat-square)](https://github.com/ant-design/ant-design)
+[![Ant Design](https://img.shields.io/badge/ant--design-^3.x-green.svg?style=flat-square)](https://github.com/ant-design/ant-design)
+[![Webpack](https://img.shields.io/badge/webpack-^4.x-blueviolet.svg?style=flat-square)](https://webpack.js.org/)
+[![Babel](https://img.shields.io/badge/babel-^7.x-important.svg?style=flat-square)](https://babeljs.io/)
 
 [![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
