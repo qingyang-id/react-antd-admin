@@ -7,7 +7,7 @@ import thriftFileMock from './thriftFile';
 import serverMock from './server';
 
 Mock.setup({
-  timeout: '500-2000'
+  timeout: '500-2000',
 });
 // 启动用户相关mock接口
 userMock();

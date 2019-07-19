@@ -1,17 +1,16 @@
 import React from 'react';
-import { Table, } from 'antd';
+import { Table } from 'antd';
 import './List.less';
 
 const List = ({ ...tableProps }) => {
-
   const columns = [
     {
       title: '编号',
       dataIndex: 'id',
       key: 'id',
       width: 64,
-      render: (text, record, index) =>
-        ((tableProps.pagination.current - 1) * tableProps.pagination.pageSize + index + 1)
+      render: (text, record, index) => ((tableProps.pagination.current - 1)
+        * tableProps.pagination.pageSize + index + 1),
     },
     {
       title: '文件名称',
@@ -24,7 +23,7 @@ const List = ({ ...tableProps }) => {
       dataIndex: 'size',
       key: 'size',
       sorter: true,
-      render: (text) => text && parseFloat((text/1024).toFixed(3)) || 0,
+      render: text => (text && parseFloat((text / 1024).toFixed(3))) || 0,
     },
     {
       title: '更新时间',
@@ -44,7 +43,7 @@ const List = ({ ...tableProps }) => {
     <div>
       <Table
         {...tableProps}
-        className='table'
+        className="table"
         bordered
         scroll={{ x: 1250 }}
         columns={columns}

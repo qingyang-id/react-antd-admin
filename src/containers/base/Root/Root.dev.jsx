@@ -22,7 +22,7 @@ class Root extends React.Component {
         <ConnectedRouter history={history}>
           <div style={{ height: '100%' }}>
             {renderRoutes(rootRoutes)}
-             {/*<DevTools />*/}
+            {/*<DevTools />*/}
           </div>
         </ConnectedRouter>
       </Provider>

@@ -3,8 +3,11 @@
  * @author      yq
  * @date        2017-10-19 13:19:27
  */
-import { put, call, fork, takeLatest } from 'redux-saga/effects';
-import { QUERY_SUCCESS, QUERY_LIST, UPLOAD,
+import {
+  put, call, fork, takeLatest,
+} from 'redux-saga/effects';
+import {
+  QUERY_SUCCESS, QUERY_LIST, UPLOAD,
   UPDATE_STATE as UPDATE_THRIFT_FILE_STATE,
 } from '../types/thriftFile';
 import { UPDATE_STATE, HANDLE_SUCCESS, HANDLE_FAILED } from '../types/app';
@@ -22,7 +25,7 @@ function* doUpload(action) {
     // 新增操作
     yield call(ThriftFileService.upload, action.payload);
     // 隐藏模态框
-    yield put({ type: UPDATE_THRIFT_FILE_STATE, payload: { modalVisible: false, } });
+    yield put({ type: UPDATE_THRIFT_FILE_STATE, payload: { modalVisible: false } });
     // 显示修改成功
     yield put({ type: HANDLE_SUCCESS, payload: { msg: '上传成功' } });
     // 成功回调
@@ -58,7 +61,7 @@ function* doQueryList(action) {
           pageSize: Number(action.payload.pageSize || 10),
           total: response.data.total,
         },
-      }
+      },
     });
   } catch (error) {
     console.error('查询列表失败：', error);

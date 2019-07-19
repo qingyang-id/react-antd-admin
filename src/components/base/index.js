@@ -6,4 +6,4 @@ export {
   DataTable,
   DropOption,
   FilterItem,
-}
+};

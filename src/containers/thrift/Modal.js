@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, Modal, } from 'antd';
+import { Form, Input, Modal } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -14,31 +14,31 @@ const formItemLayout = {
 };
 
 const modal = ({
-                 item = {
-                   method: 'get',
-                   role: 1,
-                 },
-                 onOk,
-                 form: {
-                   getFieldDecorator,
-                   validateFields,
-                   setFieldsValue,
-                   getFieldsValue,
-                   getFieldValue,
-                 },
-                 ...modalProps
-               }) => {
+  item = {
+    method: 'get',
+    role: 1,
+  },
+  onOk,
+  form: {
+    getFieldDecorator,
+    validateFields,
+    setFieldsValue,
+    getFieldsValue,
+    getFieldValue,
+  },
+  ...modalProps
+}) => {
   const handleChange = (key) => {
     const value = getFieldValue(key);
     if (key === 'thriftName' && value) {
       const fields = {
         serverPath: `/rpccenter/zlthrift-${value}/cluster`,
         servicePath: `/rpccenter/zlthrift-${value}/service-class`,
-        lockPath: `/rpccenter/zlthrift-${value}/lock-conn`
-      }
+        lockPath: `/rpccenter/zlthrift-${value}/lock-conn`,
+      };
       setFieldsValue(fields);
     }
-  }
+  };
 
   const handleOk = () => {
     validateFields((errors) => {
@@ -74,7 +74,7 @@ const modal = ({
                 message: 'thrift名称不正确',
               },
             ],
-          })(<Input onKeyUp={handleChange.bind(this, 'thriftName')}/>)}
+          })(<Input onKeyUp={handleChange.bind(this, 'thriftName')} />)}
         </FormItem>
         <FormItem label="主机节点" hasFeedback {...formItemLayout}>
           {getFieldDecorator('serverPath', {

@@ -10,13 +10,13 @@ import {
 } from '../types/thrift';
 
 // 更新state
-export const updateThriftState = (data) => ({ type: UPDATE_THRIFT_STATE, payload: data });
+export const updateThriftState = data => ({ type: UPDATE_THRIFT_STATE, payload: data });
 
 // 查询列表(不含count)
-export const query = (payload) => ({ type: QUERY, payload, });
+export const query = payload => ({ type: QUERY, payload });
 
 // 查询列表(含count)
-export const queryList = (payload) => ({ type: QUERY_LIST, payload, });
+export const queryList = payload => ({ type: QUERY_LIST, payload });
 
 // 删除
 export const remove = (id, cb) => ({ type: DELETE, payload: id, cb });

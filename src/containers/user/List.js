@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Table,
-  Modal
+  Modal,
 } from 'antd';
 import classnames from 'classnames';
 import {
-  DropOption
-} from '../../components/base';
-import {
-  Link
+  Link,
 } from 'react-router-dom';
+import {
+  DropOption,
+} from '../../components/base';
 import AnimTableBody from '../../components/base/DataTable/AnimTableBody';
 import './List.less';
 
-const confirm = Modal.confirm;
+const { confirm } = Modal;
 
 const List = ({
   onDeleteItem,
@@ -42,7 +42,7 @@ const List = ({
     key: 'avatar',
     width: 64,
     // className: 'avatar',
-    render: text => <img alt={'avatar'} width={24} src={text}/>,
+    render: text => <img alt="avatar" width={24} src={text} />,
   }, {
     title: 'Name',
     dataIndex: 'name',
@@ -60,9 +60,13 @@ const List = ({
     title: 'Gender',
     dataIndex: 'isMale',
     key: 'isMale',
-    render: text => (<span>{text
-        ? 'Male'
-        : 'Female'}</span>),
+    render: text => (
+      <span>
+        {text
+          ? 'Male'
+          : 'Female'}
+      </span>
+    ),
   }, {
     title: 'Phone',
     dataIndex: 'phone',
@@ -83,26 +87,26 @@ const List = ({
     title: 'Operation',
     key: 'operation',
     width: 100,
-    render: (text, record) => {
-      return <DropOption onMenuClick={e => handleMenuClick(record, e)}
-                           menuOptions={[{ key: '1', name: 'Update' }, { key: '2', name: 'Delete' }]}/>;
-    },
-  }, ];
+    render: (text, record) => (
+      <DropOption
+        onMenuClick={e => handleMenuClick(record, e)}
+        menuOptions={[{ key: '1', name: 'Update' }, { key: '2', name: 'Delete' }]}
+      />
+    ),
+  }];
 
   const getBodyWrapperProps = {
     page: location.query.page,
     current: tableProps.pagination.current,
   };
 
-  const getBodyWrapper = (body) => {
-    return isMotion ? <AnimTableBody {...getBodyWrapperProps} body={body}/> : body;
-  };
+  const getBodyWrapper = body => (isMotion ? <AnimTableBody {...getBodyWrapperProps} body={body} /> : body);
 
   return (
     <div>
       <Table
         {...tableProps}
-        className={classnames({ ['table']: true, ['motion']: isMotion })}
+        className={classnames({ table: true, motion: isMotion })}
         bordered
         scroll={{ x: 1250 }}
         columns={columns}

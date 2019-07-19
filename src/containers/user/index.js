@@ -1,25 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Button, Popconfirm } from 'antd';
+import {
+  Row, Col, Button, Popconfirm,
+} from 'antd';
 import { bindActionCreators } from 'redux';
 import List from './List';
 import Filter from './Filter';
 import Modal from './Modal';
-import { query, remove, multiDelete, create,
-  update, hideModal, showModal, updateState, switchIsMotion, } from '../../redux/actions/user';
+import {
+  query, remove, multiDelete, create,
+  update, hideModal, showModal, updateState, switchIsMotion,
+} from '../../redux/actions/user';
 
 class Api extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   handleDeleteItems() {
     this.props.multiDelete({
-        ids: this.selectedRowKeys,
+      ids: this.selectedRowKeys,
     });
-  };
+  }
+
   render() {
-    const { list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = this.props.user;
+    const {
+      list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys,
+    } = this.props.user;
     const that = this;
     const modalProps = {
       item: modalType === 'create' ? {} : currentItem,
@@ -62,7 +70,7 @@ class Api extends React.Component {
           list: [],
           page: 1,
           pageSize: 15,
-        })
+        });
         // const { query, pathname } = location;
         // dispatch(routerRedux.push({
         //   pathname,
@@ -76,7 +84,7 @@ class Api extends React.Component {
       onDeleteItem(id) {
         console.log('onDeleteItem   ', id);
         that.props.remove({
-          id
+          id,
         });
       },
       onEditItem(item) {
@@ -84,7 +92,7 @@ class Api extends React.Component {
         that.props.showModal({
           modalType: 'update',
           currentItem: item,
-        })
+        });
         // dispatch({
         //   type: 'user/showModal',
         //   payload: {
@@ -98,7 +106,7 @@ class Api extends React.Component {
         onChange: (keys) => {
           that.props.updateState({
             selectedRowKeys: keys,
-          })
+          });
         },
       },
     };
@@ -114,7 +122,7 @@ class Api extends React.Component {
           list: [],
           page: 1,
           pageSize: 15,
-        })
+        });
         // dispatch(routerRedux.push({
         //   pathname: location.pathname,
         //   query: {
@@ -132,7 +140,7 @@ class Api extends React.Component {
           list: [],
           page: 1,
           pageSize: 15,
-        })
+        });
         // fieldsValue.keyword.length ? dispatch(routerRedux.push({
         //   pathname: '/user',
         //   query: {
@@ -147,7 +155,7 @@ class Api extends React.Component {
         console.log('onAdd');
         that.props.showModal({
           modalType: 'create',
-        })
+        });
         // dispatch({
         //   type: 'user/showModal',
         //   payload: {
@@ -166,26 +174,28 @@ class Api extends React.Component {
       <div className="content-inner">
         <Filter {...filterProps} />
         {
-          selectedRowKeys.length > 0 &&
+          selectedRowKeys.length > 0
+          && (
           <Row style={{ marginBottom: 24, textAlign: 'right', fontSize: 13 }}>
             <Col>
               {`Selected ${selectedRowKeys.length} items `}
-              <Popconfirm title={'Are you sure delete these items?'} placement="left" onConfirm={handleDeleteItems}>
+              <Popconfirm title="Are you sure delete these items?" placement="left" onConfirm={handleDeleteItems}>
                 <Button type="primary" size="large" style={{ marginLeft: 8 }}>Remove</Button>
               </Popconfirm>
             </Col>
           </Row>
+          )
         }
         <List {...listProps} />
         {modalVisible && <Modal {...modalProps} />}
       </div>
     );
   }
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const user = state.userReducer;
-  return { user, };
+  return { user };
 };
 const mapDispatchToProps = dispatch => ({
   remove: bindActionCreators(remove, dispatch),

@@ -37,7 +37,8 @@ cd react-antd-admin
 ### 安装
 ```bash
 
-// 安装前请先确保已安装node和npm
+// 安装前请先确保已安装node和npm和yarn
+npm install yarn -g
 
 // 安装成功后,再安装依赖，如果之前有用npm安装过，请先删掉node_modules
 yarn install

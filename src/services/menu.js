@@ -3,8 +3,10 @@
  * @author yq
  * @date 2017/9/8 下午4:47
  */
-import { queryMenuApi, queryMenusApi, createMenuApi,
-  updateMenuApi, removeMenuApi, batchRemoveMenuApi, } from '../config/api';
+import {
+  queryMenuApi, queryMenusApi, createMenuApi,
+  updateMenuApi, removeMenuApi, batchRemoveMenuApi,
+} from '../config/api';
 import HttpUtil from '../utils/httpUtil';
 
 /**
@@ -12,36 +14,30 @@ import HttpUtil from '../utils/httpUtil';
  * @param data
  * @returns {*}
  */
-export const create = (data) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    data,
-  }, createMenuApi));
-};
+export const create = data => HttpUtil.send(Object.assign({
+  encode: false,
+  data,
+}, createMenuApi));
 
 /**
  * 删除API delete是关键字，因此采用remove
  * @param id
  * @returns {*}
  */
-export const remove = (id) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    params: { id },
-  }, removeMenuApi));
-};
+export const remove = id => HttpUtil.send(Object.assign({
+  encode: false,
+  params: { id },
+}, removeMenuApi));
 
 /**
  * 批量删除API
  * @param id
  * @returns {*}
  */
-export const batchRemove = (ids) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    data: { ids },
-  }, batchRemoveMenuApi));
-};
+export const batchRemove = ids => HttpUtil.send(Object.assign({
+  encode: false,
+  data: { ids },
+}, batchRemoveMenuApi));
 
 /**
  * 分页查询列表
@@ -52,34 +48,28 @@ export const batchRemove = (ids) => {
  *        }
  * @returns {*}
  */
-export const queryList = (query) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    query,
-  }, queryMenusApi));
-};
+export const queryList = query => HttpUtil.send(Object.assign({
+  encode: false,
+  query,
+}, queryMenusApi));
 
 /**
  * 查询详情
  * @param id
  * @returns {*}
  */
-export const queryDetail = (id) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    params: { id },
-  }, queryMenuApi));
-};
+export const queryDetail = id => HttpUtil.send(Object.assign({
+  encode: false,
+  params: { id },
+}, queryMenuApi));
 
 /**
  * 修改API
  * @param data
  * @returns {*}
  */
-export const update = (data) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    params: { id: data.id, },
-    data,
-  }, updateMenuApi));
-};
+export const update = data => HttpUtil.send(Object.assign({
+  encode: false,
+  params: { id: data.id },
+  data,
+}, updateMenuApi));

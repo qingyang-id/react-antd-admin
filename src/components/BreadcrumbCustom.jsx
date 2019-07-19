@@ -4,7 +4,7 @@
  * @date 2017/9/14 上午10:43
  */
 import React from 'react';
-import { Breadcrumb, Switch, Icon } from 'antd';
+import { Breadcrumb, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import themes from '../style/theme';
 import pathToRegexp from 'path-to-regexp';
@@ -119,12 +119,12 @@ class BreadcrumbCustom extends React.Component {
       parentRoute = currentRoute;
       currentRoute = null;
     }
-    const themesTag = this.state.themes.map((v, i) => (
-      <div className="pull-left y-center mr-m mb-s" key={i}>
-        <i className={`w-24 mr-s b-a ${v.type}`}/>
-        <Switch checked={v.checked} onChange={() => this.themeChange(v)}/>
-      </div>
-    ));
+    // const themesTag = this.state.themes.map((v, i) => (
+    //   <div className="pull-left y-center mr-m mb-s" key={i}>
+    //     <i className={`w-24 mr-s b-a ${v.type}`}/>
+    //     <Switch checked={v.checked} onChange={() => this.themeChange(v)}/>
+    //   </div>
+    // ));
     return (
       <div className='bread'>
         <Breadcrumb>

@@ -21,5 +21,5 @@ export const UI_DIR = {
       icon: 'api',
       component: Wysiwyg,
     },
-  ]
+  ],
 };

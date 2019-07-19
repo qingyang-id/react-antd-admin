@@ -6,7 +6,7 @@ import styles from './index.less';
 const Detail = ({ userDetail }) => {
   const { data } = userDetail;
   const content = [];
-  for (let key in data) {
+  for (const key in data) {
     if ({}.hasOwnProperty.call(data, key)) {
       content.push(<div key={key} className={styles.item}>
         <div>{key}</div>
@@ -14,11 +14,13 @@ const Detail = ({ userDetail }) => {
       </div>);
     }
   }
-  return (<div className="content-inner">
-    <div className={styles.content}>
-      {content}
+  return (
+    <div className="content-inner">
+      <div className={styles.content}>
+        {content}
+      </div>
     </div>
-  </div>);
+  );
 };
 
 Detail.propTypes = {

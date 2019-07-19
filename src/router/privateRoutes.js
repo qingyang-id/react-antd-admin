@@ -9,19 +9,19 @@ const PrivateRoute = ({ match }) => (
     {console.log(match)}
 
     {
-      isLogin ?
-        (
+      isLogin
+        ? (
           <Redirect
             to={{
               pathname: '/home/guide',
-              state: { from: match.params.id }
+              state: { from: match.params.id },
             }}
           />
         ) : (
           <Redirect
             to={{
               pathname: '/login',
-              state: { from: match.params.id }
+              state: { from: match.params.id },
             }}
           />
         )
@@ -33,7 +33,7 @@ const PrivateRoute = ({ match }) => (
 const privateRoutes = [{
   path: '/',
   exact: true,
-  component: PrivateRoute // 无其他信息; 不需要渲染组件
+  component: PrivateRoute, // 无其他信息; 不需要渲染组件
 }];
 
 export default privateRoutes;

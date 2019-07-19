@@ -9,10 +9,10 @@ import {
 } from '../types/api.js';
 
 // 更新state
-export const updateApiState = (data) => ({ type: UPDATE_API_STATE, payload: data });
+export const updateApiState = data => ({ type: UPDATE_API_STATE, payload: data });
 
 // 查询列表
-export const queryList = (payload) => ({ type: QUERY_LIST, payload, });
+export const queryList = payload => ({ type: QUERY_LIST, payload });
 
 // 删除
 export const remove = (id, cb) => ({ type: DELETE, payload: id, cb });

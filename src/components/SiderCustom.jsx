@@ -23,7 +23,6 @@ class SiderCustom extends Component {
       openKeys: this.props.openKeys,
       popoverMenuHide: this.props.popoverMenuHide,
       changeOpenKeys: (openKeys) => {
-        console.warn('\n\n\n\n改变openKeys----', openKeys, '\n\n\n\n');
         that.props.changeMenuKeys({ openKeys });
       },
       switchMenuPopover: this.props.switchMenuPopover,

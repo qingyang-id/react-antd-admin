@@ -3,19 +3,23 @@
  * @author yq
  * @date 2017/9/9 下午3:39
  */
-import { race, put, call, take, fork, takeLatest } from 'redux-saga/effects';
-import { LOGIN, LOGOUT, UPDATE_PASSWORD, LOGIN_SUCCESS, } from '../types/user';
+import {
+  race, put, call, take, fork, takeLatest,
+} from 'redux-saga/effects';
+import { push } from 'connected-react-router';
+import MD5 from 'blueimp-md5';
+import {
+  LOGIN, LOGOUT, UPDATE_PASSWORD, LOGIN_SUCCESS,
+} from '../types/user';
 import { UPDATE_STATE, HANDLE_SUCCESS, HANDLE_FAILED } from '../types/app';
 import * as UserService from '../../services/user';
 // import { push } from 'react-router-redux';
-import { push } from 'connected-react-router';
 import { queryURL } from '../../utils';
 
-//或者使用ES6 import
-import MD5 from 'blueimp-md5';
+// 或者使用ES6 import
 
 
-function* doLogin({ account, password, }) {
+function* doLogin({ account, password }) {
   try {
     // 打开loading
     yield put({ type: UPDATE_STATE, payload: { loading: true } });
@@ -48,7 +52,10 @@ function* doLogout() {
     // 显示成功信息
     yield put({ type: HANDLE_SUCCESS, payload: { msg: '退出成功' } });
     // 跳转到登录页面
+    console.log('跳转到登陆页面');
+    // yield call([history, history.push], '/login');
     yield put(push('/login'));
+    // yield call(history.push, '/login');
   } catch (error) {
     yield put({ type: HANDLE_FAILED, payload: error });
   } finally {
@@ -66,14 +73,14 @@ function* doUpdatePassword(action) {
   try {
     // 显示loading
     yield put({ type: UPDATE_STATE, payload: { loading: true } });
-    const { oldPassword, newPassword, } = action.payload;
+    const { oldPassword, newPassword } = action.payload;
     // 修改密码
     yield call(UserService.updatePassword, {
       oldPassword: MD5(oldPassword),
       newPassword: MD5(newPassword),
     });
     // 隐藏模态框
-    yield put({ type: UPDATE_STATE, payload: { modalVisible: false, } });
+    yield put({ type: UPDATE_STATE, payload: { modalVisible: false } });
     // 显示成功信息
     yield put({ type: HANDLE_SUCCESS, payload: { msg: '修改成功' } });
     // 跳转到登录页面
@@ -97,14 +104,14 @@ export function* login() {
   while (true) {
     try {
       // And we're listening for `LOGIN_REQUEST` actions and destructuring its payload
-      let request = yield take(LOGIN);
-      let { account, password } = request.payload;
+      const request = yield take(LOGIN);
+      const { account, password } = request.payload;
       // A `LOGOUT` action may happen while the `authorize` effect is going on, which may
       // lead to a race condition. This is unlikely, but just in case, we call `race` which
       // returns the "winner", i.e. the one that finished first
-      let winner = yield race({
-        auth: call(doLogin, { account, password, }),
-        logout: take(LOGOUT)
+      const winner = yield race({
+        auth: call(doLogin, { account, password }),
+        logout: take(LOGOUT),
       });
       // If `authorize` was the winner...
       if (winner.auth) {

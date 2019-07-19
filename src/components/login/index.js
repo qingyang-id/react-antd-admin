@@ -44,7 +44,6 @@ class Login extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('\n\n\nReceived values of form: ', values);
         this.props.login(values);
       }
     });
@@ -88,12 +87,12 @@ class Login extends React.Component {
             })(
               <Checkbox>记住我</Checkbox>
             )}
-            <a className="login-form-forgot" onClick={this.info} style={{ float: 'right' }}>忘记密码</a>
+            <a className="login-form-forgot" onClick={this.info} style={{ float: 'right' }} href="#">忘记密码</a>
             <Button type="primary" htmlType="submit" size="large" onClick={this.handleSubmit}
               className="login-form-button" loading={this.props.loading}>
               登录
             </Button>
-            或 <a onClick={this.info.bind(this, { title: '提示信息', messages: ['请联系管理员', '申请开通账号'] })}>现在就去注册!</a>
+            或 <a onClick={this.info.bind(this, { title: '提示信息', messages: ['请联系管理员', '申请开通账号'] })} href="#">现在就去注册!</a>
           </FormItem>
         </Form>
       </div>

@@ -4,8 +4,10 @@
  * @date        2017-10-16 17:22:52
  */
 
-import { UPDATE_THRIFT_STATE, DELETE_SUCCESS, QUERY_SUCCESS,
-  BATCH_DELETE_SUCCESS, SHOW_MODAL, HIDE_MODAL, } from '../types/thrift';
+import {
+  UPDATE_THRIFT_STATE, DELETE_SUCCESS, QUERY_SUCCESS,
+  BATCH_DELETE_SUCCESS, SHOW_MODAL, HIDE_MODAL,
+} from '../types/thrift';
 
 const userReducer = (state = {
   // 列表数据
@@ -56,5 +58,5 @@ const userReducer = (state = {
   }
 };
 export default userReducer;
-export const getApp = (state) => state.app;
-export const getPagination = (state) => getApp(state).pagination;
+export const getApp = state => state.app;
+export const getPagination = state => getApp(state).pagination;

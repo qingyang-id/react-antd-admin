@@ -6,14 +6,16 @@
 
 import Mock from 'mockjs';
 import { queryParse } from '../utils';
-import { queryThriftApi, queryThriftsApi, queryThriftListApi, createThriftApi, updateThriftApi,
-  updateThriftStatusApi, removeThriftApi, batchRemoveThriftApi, } from '../config/api';
+import {
+  queryThriftsApi, queryThriftListApi, createThriftApi, updateThriftApi,
+  updateThriftStatusApi, removeThriftApi, batchRemoveThriftApi,
+} from '../config/api';
 
 const listData = Mock.mock({
   'data|5-10': [
     {
       id: '@id',
-      'type': 1,
+      type: 1,
       thriftName: /^[a-zA-Z_0-9]+$/,
       serverPath: /^(\/[a-z]+)+$/,
       servicePath: /^(\/[a-z]+)+$/,
@@ -46,7 +48,9 @@ export default () => {
         query = {};
       }
     }
-    let { pageSize, page, sorts, ...other } = query;
+    let {
+      pageSize, page, sorts, ...other
+    } = query;
     pageSize = pageSize || 10;
     page = page || 1;
     let newData = database;
@@ -55,20 +59,20 @@ export default () => {
       const key = otherKeys[i];
       newData = newData.filter((item) => {
         if (key === 'status') {
-            return item.status.toString() === other[key];
-          } else if (key === 'keyword') {
-            return item.thriftName.indexOf(other[key]) !== -1;
-          } else if (key === 'startTime') {
-            const start = new Date(other[key]).getTime();
-            const now = new Date(item.createTime).getTime();
-            return now >= start;
-          } else if (key === 'endTime') {
-            const end = new Date(other[key]).getTime();
-            const now = new Date(item.createTime).getTime();
-            return now <= end;
-          }
-          return true;
-        });
+          return item.status.toString() === other[key];
+        } if (key === 'keyword') {
+          return item.thriftName.indexOf(other[key]) !== -1;
+        } if (key === 'startTime') {
+          const start = new Date(other[key]).getTime();
+          const now = new Date(item.createTime).getTime();
+          return now >= start;
+        } if (key === 'endTime') {
+          const end = new Date(other[key]).getTime();
+          const now = new Date(item.createTime).getTime();
+          return now <= end;
+        }
+        return true;
+      });
     }
 
     if (sorts) {
@@ -88,8 +92,8 @@ export default () => {
               : b[sortArr[0]] - a[sortArr[0]];
           }
           return sortArr[1] === 'asc'
-          ? new Date(a[sortArr[0]]) - new Date(b[sortArr[0]])
-          : new Date(b[sortArr[0]]) - new Date(a[sortArr[0]]);
+            ? new Date(a[sortArr[0]]) - new Date(b[sortArr[0]])
+            : new Date(b[sortArr[0]]) - new Date(a[sortArr[0]]);
         });
       }
     }
@@ -100,7 +104,7 @@ export default () => {
       data: {
         list: newData.slice((page - 1) * pageSize, page * pageSize),
         total: newData.length,
-      }
+      },
     });
   });
   // Mock
@@ -116,7 +120,9 @@ export default () => {
         query = {};
       }
     }
-    let { pageSize, page, sorts, ...other } = query;
+    let {
+      pageSize, page, sorts, ...other
+    } = query;
     pageSize = pageSize || 10;
     page = page || 1;
     let newData = database;
@@ -125,20 +131,20 @@ export default () => {
       const key = otherKeys[i];
       newData = newData.filter((item) => {
         if (key === 'status') {
-            return item.status.toString() === other[key];
-          } else if (key === 'keyword') {
-            return item.thriftName.indexOf(other[key]) !== -1;
-          } else if (key === 'startTime') {
-            const start = new Date(other[key]).getTime();
-            const now = new Date(item.createTime).getTime();
-            return now >= start;
-          } else if (key === 'endTime') {
-            const end = new Date(other[key]).getTime();
-            const now = new Date(item.createTime).getTime();
-            return now <= end;
-          }
-          return true;
-        });
+          return item.status.toString() === other[key];
+        } if (key === 'keyword') {
+          return item.thriftName.indexOf(other[key]) !== -1;
+        } if (key === 'startTime') {
+          const start = new Date(other[key]).getTime();
+          const now = new Date(item.createTime).getTime();
+          return now >= start;
+        } if (key === 'endTime') {
+          const end = new Date(other[key]).getTime();
+          const now = new Date(item.createTime).getTime();
+          return now <= end;
+        }
+        return true;
+      });
     }
 
     if (sorts) {
@@ -158,15 +164,15 @@ export default () => {
               : b[sortArr[0]] - a[sortArr[0]];
           }
           return sortArr[1] === 'asc'
-          ? new Date(a[sortArr[0]]) - new Date(b[sortArr[0]])
-          : new Date(b[sortArr[0]]) - new Date(a[sortArr[0]]);
+            ? new Date(a[sortArr[0]]) - new Date(b[sortArr[0]])
+            : new Date(b[sortArr[0]]) - new Date(a[sortArr[0]]);
         });
       }
     }
 
     return ({
       code: 0,
-      data: newData.slice((page - 1) * pageSize, page * pageSize)
+      data: newData.slice((page - 1) * pageSize, page * pageSize),
     });
   });
   // 启停用
@@ -181,11 +187,11 @@ export default () => {
         body = {};
       }
     }
-    let { id, status } = body;
+    const { id, status } = body;
     const editItem = {
       id,
       status,
-      updateTime: Mock.mock('@now')
+      updateTime: Mock.mock('@now'),
     };
     let isExist = false;
     database = database.map((item) => {
@@ -218,13 +224,15 @@ export default () => {
         body = {};
       }
     }
-    let { thriftName, serverPath, servicePath, lockPath } = body;
+    const {
+      thriftName, serverPath, servicePath, lockPath,
+    } = body;
     const editItem = {
       thriftName,
       serverPath,
       servicePath,
       lockPath,
-      updateTime: Mock.mock('@now')
+      updateTime: Mock.mock('@now'),
     };
     const id = options.url.match('[0-9]+$')[0];
     let isExist = false;
@@ -267,7 +275,7 @@ export default () => {
         body = {};
       }
     }
-    let newData = body;
+    const newData = body;
     const oldApi = database.find(item => (item.thriftName === newData.thriftName));
     if (oldApi) {
       return {

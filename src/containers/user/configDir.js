@@ -14,7 +14,7 @@ const API_DIR = {
       ancestor: ['api'],
       component: ApiList,
     },
-  ]
+  ],
 };
 
 export { API_DIR };

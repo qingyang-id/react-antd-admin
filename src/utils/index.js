@@ -1,81 +1,79 @@
 // 常用方法
-import classnames from 'classnames';
-import lodash from 'lodash';
-import config from '../config';
-import request from './request';
-import { color } from './theme';
-import { isString, findIndex } from 'lodash';
+import classnames from 'classnames'
+import { isString, findIndex } from 'lodash'
+import config from '../config'
+import request from './request'
+import { color } from './theme'
+
 
 // 获取url的参数
 export const queryParse = (queryStr) => {
   if (!queryStr || !queryStr.trim()) {
-    return {};
+    return {}
   }
-  queryStr = queryStr.substring(queryStr.indexOf('?'));
-  const search = queryStr.trim().substr(1);
+  queryStr = queryStr.substring(queryStr.indexOf('?'))
+  const search = queryStr.trim()
+    .substr(1)
   if (!search) {
-    return {};
+    return {}
   }
-  let query = {};
-  const params = search.split('&');
+  const query = {}
+  const params = search.split('&')
   params.forEach((v) => {
-    const param = v.split('=');
+    const param = v.split('=')
     if (!param[0] || !param[0].trim() || param[0].trim() === 'undefined') {
-      return;
+      return
     }
     if (!query.hasOwnProperty(param[0])) {
-      query[param[0]] = decodeURIComponent(param[1]);
+      query[param[0]] = decodeURIComponent(param[1])
     } else if (typeof query[param[0]] === 'string') {
-      query[param[0]] = [query[param[0]], decodeURIComponent(param[1])];
+      query[param[0]] = [query[param[0]], decodeURIComponent(param[1])]
     } else {
-      query[param[0]].push(decodeURIComponent(param[1]));
+      query[param[0]].push(decodeURIComponent(param[1]))
     }
-  });
-  return query;
-};
+  })
+  return query
+}
 // 拼接url的参数
-export const queryString = (query = {}) => {
-  return Object.keys(query)
-    .filter((key) => typeof query[key] !== 'undefined')
-    .map((key) => `${key}=${query[key]}`)
-    .join('&');
-};
+export const queryString = (query = {}) => Object.keys(query)
+  .filter(key => typeof query[key] !== 'undefined')
+  .map(key => `${key}=${query[key]}`)
+  .join('&')
 
 // 深拷贝(简单实现)
-const stateCopy = (stateObj) => {
-  return JSON.parse(JSON.stringify(stateObj));
-};
+const stateCopy = stateObj => JSON.parse(JSON.stringify(stateObj))
 
 // 中级 深拷贝
 const cloneObj = function (obj) {
-  let str;
-  let newobj = obj.constructor === Array ? [] : {};
+  let str
+  let newobj = obj.constructor === Array ? [] : {}
   if (typeof obj !== 'object') {
-    return newobj;
-  } else if (window.JSON) {
-    str = JSON.stringify(obj); // 系列化对象
-    newobj = JSON.parse(str); // 还原
+    return newobj
+  }
+  if (window.JSON) {
+    str = JSON.stringify(obj) // 系列化对象
+    newobj = JSON.parse(str) // 还原
   } else {
     for (let i in obj) {
       newobj[i] = typeof obj[i] === 'object' ?
         cloneObj(obj[i]) :
-        obj[i];
+        obj[i]
     }
   }
-  return newobj;
-};
+  return newobj
+}
 
 const hasString = (array, property, findString) => { // 检索数组, 检索属性, 检索值
   if (isString(findString)) {
-    return findIndex(array, (o) => o[property] === findString); // True: 无 url; False: 有 url
+    return findIndex(array, o => o[property] === findString) // True: 无 url; False: 有 url
   }
-};
+}
 
 // 判断浏览器 版本
 const myBrowser = () => {
-  let userAgent = navigator.userAgent; // 取得浏览器的userAgent字符串
-  let isOpera = userAgent.indexOf('Opera') > -1; // 判断是否Opera浏览器
-  let isIE = userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1 && !isOpera; // 判断是否IE浏览器
+  const { userAgent } = navigator; // 取得浏览器的userAgent字符串
+  const isOpera = userAgent.indexOf('Opera') > -1; // 判断是否Opera浏览器
+  const isIE = userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1 && !isOpera; // 判断是否IE浏览器
 
   if (isIE) {
     let IE55 = false;
@@ -83,9 +81,9 @@ const myBrowser = () => {
     let IE7 = false;
     let IE8 = false;
 
-    let reIE = new RegExp('MSIE (\\d+\\.\\d+);');
+    const reIE = new RegExp('MSIE (\\d+\\.\\d+);');
     reIE.test(userAgent);
-    let fIEVersion = parseFloat(RegExp['$1']);
+    const fIEVersion = parseFloat(RegExp.$1);
     IE55 = fIEVersion === 5.5;
     IE6 = fIEVersion === 6.0;
     IE7 = fIEVersion === 7.0;
@@ -105,18 +103,17 @@ const myBrowser = () => {
   } // isIE end
 };
 
-
+/* eslint-disable */
 // 连字符转驼峰
 String.prototype.hyphenToHump = function () {
-  return this.replace(/-(\w)/g, (...args) => {
-    return args[1].toUpperCase();
-  });
+  return this.replace(/-(\w)/g, (...args) => args[1].toUpperCase())
 };
 
 // 驼峰转连字符
 String.prototype.humpToHyphen = function () {
-  return this.replace(/([A-Z])/g, '-$1').toLowerCase();
-};
+  return this.replace(/([A-Z])/g, '-$1')
+    .toLowerCase()
+}
 
 /**
  * 对Date的扩展，将 Date 转化为指定格式的String
@@ -138,20 +135,23 @@ Date.prototype.format = (format) => {
     'm+': this.getMinutes(), // 分
     's+': this.getSeconds(), // 秒
     'q+': Math.floor((this.getMonth() + 3) / 3), // 季度
-    S: this.getMilliseconds() // 毫秒
-  };
-  if (/(y+)/.test(format)) {
-    format = format.replace(RegExp.$1, (this.getFullYear().toString()).substr(4 - RegExp.$1.length));
+    S: this.getMilliseconds(), // 毫秒
   }
-  Object.keys(formats).forEach((key) => {
-    if (new RegExp(`(${key})`).test(format)) {
-      format = format.replace(RegExp.$1, (RegExp.$1.length === 1)
-        ? formats[key] : ((`00${formats[key]}`).substr((`${formats[key]}`).length)));
-    }
-    return false;
-  });
-  return format;
+  if (/(y+)/.test(format)) {
+    format = format.replace(RegExp.$1, (this.getFullYear()
+      .toString()).substr(4 - RegExp.$1.length))
+  }
+  Object.keys(formats)
+    .forEach((key) => {
+      if (new RegExp(`(${key})`).test(format)) {
+        format = format.replace(RegExp.$1, (RegExp.$1.length === 1)
+          ? formats[key] : ((`00${formats[key]}`).substr((`${formats[key]}`).length)))
+      }
+      return false
+    })
+  return format
 }
+/* eslint-enable */
 
 
 /**
@@ -160,11 +160,12 @@ Date.prototype.format = (format) => {
  */
 
 const queryURL = (name) => {
-  let reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`, 'i');
-  let r = window.location.search.substr(1).match(reg);
-  if (r != null) return decodeURI(r[2]);
-  return null;
-};
+  const reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`, 'i')
+  const r = window.location.search.substr(1)
+    .match(reg)
+  if (r != null) return decodeURI(r[2])
+  return null
+}
 
 /**
  * 数组内查询
@@ -175,14 +176,14 @@ const queryURL = (name) => {
  */
 const queryArray = (array, key, keyAlias = 'key') => {
   if (!(array instanceof Array)) {
-    return null;
+    return null
   }
-  const item = array.filter(_ => _[keyAlias] === key);
+  const item = array.filter(_ => _[keyAlias] === key)
   if (item.length) {
-    return item[0];
+    return item[0]
   }
-  return null;
-};
+  return null
+}
 
 /**
  * 数组格式转树状结构
@@ -193,24 +194,24 @@ const queryArray = (array, key, keyAlias = 'key') => {
  * @return  {Array}
  */
 const arrayToTree = (array, id = 'id', pid = 'pid', children = 'children') => {
-  let data = lodash.cloneDeep(array);
-  let result = [];
-  let hash = {};
+  const data = lodash.cloneDeep(array)
+  const result = []
+  const hash = {}
   data.forEach((item, index) => {
-    hash[data[index][id]] = data[index];
-  });
+    hash[data[index][id]] = data[index]
+  })
 
   data.forEach((item) => {
-    let hashVP = hash[item[pid]];
+    const hashVP = hash[item[pid]]
     if (hashVP) {
-      !hashVP[children] && (hashVP[children] = []);
-      hashVP[children].push(item);
+      !hashVP[children] && (hashVP[children] = [])
+      hashVP[children].push(item)
     } else {
-      result.push(item);
+      result.push(item)
     }
-  });
-  return result;
-};
+  })
+  return result
+}
 
 export {
   stateCopy,
@@ -224,4 +225,4 @@ export {
   queryURL,
   queryArray,
   arrayToTree,
-};
+}

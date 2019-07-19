@@ -3,8 +3,10 @@
  * @author      yq
  * @date        2017-10-16 17:10:58
  */
-import { queryThriftApi, queryThriftsApi, queryThriftListApi, createThriftApi, updateThriftApi,
-  updateThriftStatusApi, removeThriftApi, batchRemoveThriftApi, } from '../config/api';
+import {
+  queryThriftApi, queryThriftsApi, queryThriftListApi, createThriftApi, updateThriftApi,
+  updateThriftStatusApi, removeThriftApi, batchRemoveThriftApi,
+} from '../config/api';
 import HttpUtil from '../utils/httpUtil';
 
 /**
@@ -12,36 +14,30 @@ import HttpUtil from '../utils/httpUtil';
  * @param data
  * @returns {*}
  */
-export const create = (data) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    data,
-  }, createThriftApi));
-};
+export const create = data => HttpUtil.send(Object.assign({
+  encode: false,
+  data,
+}, createThriftApi));
 
 /**
  * 删除 delete是关键字，因此采用remove
  * @param id
  * @returns {*}
  */
-export const remove = (id) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    params: { id },
-  }, removeThriftApi));
-};
+export const remove = id => HttpUtil.send(Object.assign({
+  encode: false,
+  params: { id },
+}, removeThriftApi));
 
 /**
  * 批量删除
  * @param id
  * @returns {*}
  */
-export const batchRemove = (ids) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    data: { ids },
-  }, batchRemoveThriftApi));
-};
+export const batchRemove = ids => HttpUtil.send(Object.assign({
+  encode: false,
+  data: { ids },
+}, batchRemoveThriftApi));
 
 /**
  * 分页查询列表不含count
@@ -52,12 +48,10 @@ export const batchRemove = (ids) => {
  *        }
  * @returns {*}
  */
-export const queryThrifts = (query) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    query,
-  }, queryThriftsApi));
-};
+export const queryThrifts = query => HttpUtil.send(Object.assign({
+  encode: false,
+  query,
+}, queryThriftsApi));
 
 /**
  * 分页查询列表(含count)
@@ -68,46 +62,38 @@ export const queryThrifts = (query) => {
  *        }
  * @returns {*}
  */
-export const queryList = (query) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    query,
-  }, queryThriftListApi));
-};
+export const queryList = query => HttpUtil.send(Object.assign({
+  encode: false,
+  query,
+}, queryThriftListApi));
 
 /**
  * 查询详情
  * @param id
  * @returns {*}
  */
-export const queryDetail = (id) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    params: { id },
-  }, queryThriftApi));
-};
+export const queryDetail = id => HttpUtil.send(Object.assign({
+  encode: false,
+  params: { id },
+}, queryThriftApi));
 
 /**
  * 修改
  * @param data
  * @returns {*}
  */
-export const update = (data) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    params: { id: data.id, },
-    data,
-  }, updateThriftApi));
-};
+export const update = data => HttpUtil.send(Object.assign({
+  encode: false,
+  params: { id: data.id },
+  data,
+}, updateThriftApi));
 
 /**
  * 修改状态
  * @param data
  * @returns {*}
  */
-export const updateStatus = (data) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    data,
-  }, updateThriftStatusApi));
-};
+export const updateStatus = data => HttpUtil.send(Object.assign({
+  encode: false,
+  data,
+}, updateThriftStatusApi));

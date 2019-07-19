@@ -3,18 +3,20 @@ import PropTypes from 'prop-types';
 import './filterItem.less';
 
 const FilterItem = ({
-                      label = '',
-                      children,
-                    }) => {
+  label = '',
+  children,
+}) => {
   const labelArray = label.split('');
   return (
-    <div className='filter-item'>
+    <div className="filter-item">
       {labelArray.length > 0
-        ? <div className='label-wrap'>
-          {labelArray.map((item, index) => <span className="labelText" key={index}>{item}</span>)}
-        </div>
+        ? (
+          <div className="label-wrap">
+            {labelArray.map((item, index) => <span className="labelText" key={index}>{item}</span>)}
+          </div>
+        )
         : ''}
-      <div className='item'>
+      <div className="item">
         {children}
       </div>
     </div>

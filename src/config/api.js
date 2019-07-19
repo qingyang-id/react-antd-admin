@@ -4,7 +4,10 @@
  * @date 2017/9/8 下午4:51
  */
 
-import { apiHost, docHost, ossHost, apiPrefix } from './index';
+import {
+  apiHost, docHost, ossHost, apiPrefix,
+} from './index';
+
 export { apiHost, docHost, ossHost };
 
 // 用户中心

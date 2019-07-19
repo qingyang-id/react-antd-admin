@@ -1,6 +1,5 @@
 node_modules/**
 dist/**
-src/index.html
-src/static/plugins/**
-src/styles/plugins/**
-src/index.html
+public
+src/App.test.js
+config/**

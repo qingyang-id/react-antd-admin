@@ -123,7 +123,7 @@ class App extends Component {
       changeMenuKeys: (options) => that.props.updateState(options),
     };
     return (
-      <Layout className={classnames('ant-layout-has-sider', 'body-content', { ['fold']: collapsed })}>
+      <Layout className={classnames('ant-layout-has-sider', 'body-content', { 'fold': collapsed })}>
         {!isMobile &&
         <SiderCustom {...siderProps}/>}
         <Layout className='main'>

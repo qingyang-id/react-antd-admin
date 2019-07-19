@@ -4,12 +4,12 @@
  * @date 2017/6/8 下午12:53
  */
 import axios from 'axios';
-import { apiHost, platform, version, } from '../config';
-import { removeToken, getToken } from '../utils/auth';
+import { apiHost, platform, version } from '../config';
+import { removeToken, getToken } from './auth';
 
 // 设置默认参数
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.headers.common['Authorization'] = getToken() || '';
+axios.defaults.headers.common.Authorization = getToken() || '';
 // 以下代码为临时代码
 axios.defaults.baseURL = localStorage.apiHost || apiHost;
 axios.defaults.timeout = 30000;
@@ -46,17 +46,15 @@ axios.interceptors.response.use((response) => {
     return Promise.reject(response.data);
   }
   return response;
-}, (error) => {
+}, error =>
   // Do something with response error
-  return Promise.reject(error);
-});
+  Promise.reject(error));
 
 const HTTPERROR = {
   code: 500,
   msg: '请求失败，请稍后再试',
 };
 class HttpUtil {
-
   /**
    * http请求参数格式化方法
    * HttpUtil.formatParams({
@@ -141,19 +139,19 @@ class HttpUtil {
     if (opts.method === 'get') {
       opts.query = Object.assign({}, opts.query, {
         platform,
-        version
+        version,
       });
     } else if (!opts.headers || opts.headers['Content-Type'] !== 'multipart/form-data') {
       opts.data = Object.assign({}, opts.data, {
         platform,
-        version
+        version,
       });
     }
     // 请求配置
     const sendOpts = {
       method: opts.method,
       url: opts.url,
-      timeout: opts.timeout || 30000
+      timeout: opts.timeout || 30000,
     };
     if (opts.responseType) {
       sendOpts.responseType = opts.responseType;
@@ -174,8 +172,8 @@ class HttpUtil {
     if (opts.encode) {
       // url参数，如get请求中/n/qrcode?json=encodeURIComponent(JSON.stringify({ uid: 1101 }))中，query为 { uid: 1101 }
       if (opts.query) {
-        sendOpts.url = sendOpts.url.indexOf('?') === -1 ?
-          `${sendOpts.url}?json=${HttpUtil.formatParams(opts.query)}`
+        sendOpts.url = sendOpts.url.indexOf('?') === -1
+          ? `${sendOpts.url}?json=${HttpUtil.formatParams(opts.query)}`
           : `${sendOpts.url}&json=${HttpUtil.formatParams(opts.query)}`;
       }
       if (opts.data) {

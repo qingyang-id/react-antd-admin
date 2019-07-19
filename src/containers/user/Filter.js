@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import {
+  Form, Button, Row, Col, DatePicker, Input, Cascader, Switch,
+} from 'antd';
 import { FilterItem } from '../../components/base';
-import { Form, Button, Row, Col, DatePicker, Input, Cascader, Switch } from 'antd';
 import city from '../../utils/city';
 
-const Search = Input.Search;
+const { Search } = Input;
 const { RangePicker } = DatePicker;
 
 const ColProps = {
@@ -22,17 +24,17 @@ const TwoColProps = {
 };
 
 const Filter = ({
-                  onAdd,
-                  isMotion,
-                  switchIsMotion,
-                  onFilterChange,
-                  filter,
-                  form: {
-                    getFieldDecorator,
-                    getFieldsValue,
-                    setFieldsValue,
-                  },
-                }) => {
+  onAdd,
+  isMotion,
+  switchIsMotion,
+  onFilterChange,
+  filter,
+  form: {
+    getFieldDecorator,
+    getFieldsValue,
+    setFieldsValue,
+  },
+}) => {
   const handleFields = (fields) => {
     const { createTime } = fields;
     if (createTime.length) {
@@ -49,7 +51,7 @@ const Filter = ({
 
   const handleReset = () => {
     const fields = getFieldsValue();
-    for (let item in fields) {
+    for (const item in fields) {
       if ({}.hasOwnProperty.call(fields, item)) {
         if (fields[item] instanceof Array) {
           fields[item] = [];
@@ -70,7 +72,7 @@ const Filter = ({
   };
   const { name, address } = filter;
 
-  let initialCreateTime = [];
+  const initialCreateTime = [];
   if (filter.createTime && filter.createTime[0]) {
     initialCreateTime[0] = moment(filter.createTime[0]);
   }
@@ -81,8 +83,11 @@ const Filter = ({
   return (
     <Row gutter={24}>
       <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-        {getFieldDecorator('name', { initialValue: name })(<Search placeholder="Search Name" size="large"
-                                                                   onSearch={handleSubmit}/>)}
+        {getFieldDecorator('name', { initialValue: name })(<Search
+          placeholder="Search Name"
+          size="large"
+          onSearch={handleSubmit}
+        />)}
       </Col>
       <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
         {getFieldDecorator('address', { initialValue: address })(
@@ -92,12 +97,13 @@ const Filter = ({
             options={city}
             placeholder="Please pick an address"
             onChange={handleChange.bind(null, 'address')}
-          />)}
+          />,
+        )}
       </Col>
       <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }} sm={{ span: 12 }}>
         <FilterItem label="Createtime">
           {getFieldDecorator('createTime', { initialValue: initialCreateTime })(
-            <RangePicker style={{ width: '100%' }} size="large" onChange={handleChange.bind(null, 'createTime')}/>
+            <RangePicker style={{ width: '100%' }} size="large" onChange={handleChange.bind(null, 'createTime')} />,
           )}
         </FilterItem>
       </Col>
@@ -108,8 +114,14 @@ const Filter = ({
             <Button size="large" onClick={handleReset}>Reset</Button>
           </div>
           <div>
-            <Switch style={{ marginRight: 16 }} size="large" defaultChecked={isMotion} onChange={switchIsMotion}
-                    checkedChildren={'Motion'} unCheckedChildren={'Motion'}/>
+            <Switch
+              style={{ marginRight: 16 }}
+              size="large"
+              defaultChecked={isMotion}
+              onChange={switchIsMotion}
+              checkedChildren="Motion"
+              unCheckedChildren="Motion"
+            />
             <Button size="large" type="ghost" onClick={onAdd}>Create</Button>
           </div>
         </div>

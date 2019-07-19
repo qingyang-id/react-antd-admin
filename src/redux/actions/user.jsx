@@ -24,7 +24,7 @@ export const login = (payload) => ({ type: LOGIN, payload });
 /**
  * 退出
  */
-export const logout = () => ({ type: LOGOUT, });
+export const logout = () => ({ type: LOGOUT });
 
 /**
  * 修改密码

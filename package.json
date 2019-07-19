@@ -3,17 +3,19 @@
   "version": "1.0.0",
   "description": "react-antd管理系统",
   "private": true,
-  "author": "Sailor20",
+  "author": "yqsailor",
   "license": "MIT",
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "homepage": "/",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "cross-env NODE_ENV=production node scripts/build.js",
     "build-test": "cross-env NODE_ENV=test node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "lint": "eslint src --ignore-pattern App.test.js",
+    "fix": "eslint --fix src --ignore-pattern App.test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
@@ -64,15 +66,16 @@
     "detect-port": "1.1.0",
     "dotenv": "^8.0.0",
     "dotenv-expand": "^5.1.0",
-    "eslint": "^4.5.0",
-    "eslint-config-airbnb": "^15.1.0",
-    "eslint-config-react-app": "^1.0.4",
-    "eslint-import-resolver-node": "^0.3.1",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-flowtype": "^2.34.0",
-    "eslint-plugin-import": "^2.3.0",
-    "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-react": "^7.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-react-app": "^4.0.1",
+    "eslint-import-resolver-node": "^0.3.2",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-flowtype": "^3.11.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^4.0.0",
@@ -147,18 +150,19 @@
     "antd-theme-generator": "^1.1.7",
     "axios": "^0.19.0",
     "blueimp-md5": "^2.10.0",
-    "classnames": "^2.2.5",
+    "classnames": "^2.2.6",
     "connected-react-router": "^6.5.2",
     "copy-webpack-plugin": "^4.0.1",
     "draft-js": "^0.10.1",
     "draftjs-to-html": "^0.7.2",
     "draftjs-to-markdown": "^0.4.1",
+    "echarts": "^4.2.1",
     "echarts-for-react": "^1.4.4",
     "history": "^4.9.0",
     "immutable": "^3.8.1",
     "js-cookie": "^2.1.4",
     "jsonp": "^0.2.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.14",
     "moment": "^2.18.1",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^1.7.0",
@@ -175,10 +179,8 @@
     "react-quill": "^1.0.0-rc.2",
     "react-redux": "^7.1.0",
     "react-resizable": "^1.6.0",
-    "react-router": "^5.0.1",
     "react-router-config": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "react-router-redux": "5.0.0-alpha.6",
     "recharts": "^1.0.0-alpha.1",
     "redux": "^4.0.4",
     "redux-auth-wrapper": "^2.0.1",
@@ -191,34 +193,6 @@
   },
   "optionalDependencies": {
     "fsevents": "^1.1.2"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.js?(x)",
-      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
-    ],
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web"
-    }
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, Radio, Modal, Select, } from 'antd';
+import {
+  Form, Input, Radio, Modal, Select,
+} from 'antd';
 
 const FormItem = Form.Item;
 
@@ -14,21 +16,21 @@ const formItemLayout = {
 };
 
 const modal = ({
-                 item = {
-                   method: 'get',
-                   role: 1,
-                 },
-                 thrifts = [],
-                 onOk,
-                 form: {
-                   getFieldDecorator,
-                   validateFields,
-                   getFieldsValue,
-                   getFieldValue,
-                   setFieldsValue,
-                 },
-                 ...modalProps
-               }) => {
+  item = {
+    method: 'get',
+    role: 1,
+  },
+  thrifts = [],
+  onOk,
+  form: {
+    getFieldDecorator,
+    validateFields,
+    getFieldsValue,
+    getFieldValue,
+    setFieldsValue,
+  },
+  ...modalProps
+}) => {
   const handleOk = () => {
     validateFields((errors) => {
       if (errors) {
@@ -46,11 +48,11 @@ const modal = ({
     const value = getFieldValue(key);
     if (key === 'path' && value) {
       const fields = {
-        path: value.replace('/t/', '/')
-      }
+        path: value.replace('/t/', '/'),
+      };
       setFieldsValue(fields);
     }
-  }
+  };
 
   const modalOpts = {
     ...modalProps,
@@ -96,7 +98,7 @@ const modal = ({
                 message: '请求路径不正确',
               },
             ],
-          })(<Input onKeyUp={handleChange.bind(this, 'path')}/>)}
+          })(<Input onKeyUp={handleChange.bind(this, 'path')} />)}
         </FormItem>
         <FormItem label="请求方式" hasFeedback {...formItemLayout}>
           {getFieldDecorator('method', {
@@ -108,9 +110,9 @@ const modal = ({
               },
             ],
           })(
-            <Select style={{ width: '100%' }} size='large'>
+            <Select style={{ width: '100%' }} size="large">
               {methodSelect.map(s => <Select.Option key={s.value}>{s.title}</Select.Option>)}
-            </Select>
+            </Select>,
           )}
         </FormItem>
         <FormItem label="是否登录" hasFeedback {...formItemLayout}>
@@ -126,7 +128,7 @@ const modal = ({
             <Radio.Group>
               <Radio value={1}>是</Radio>
               <Radio value={0}>否</Radio>
-            </Radio.Group>
+            </Radio.Group>,
           )}
         </FormItem>
         <FormItem label="thrift名称" hasFeedback {...formItemLayout}>
@@ -139,9 +141,9 @@ const modal = ({
               },
             ],
           })(
-          <Select style={{ width: '100%' }} size='large' placeholder='请选择thrift名称'>
-            {thrifts.map(s => <Select.Option key={s.thriftName}>{s.thriftName}</Select.Option>)}
-          </Select>
+            <Select style={{ width: '100%' }} size="large" placeholder="请选择thrift名称">
+              {thrifts.map(s => <Select.Option key={s.thriftName}>{s.thriftName}</Select.Option>)}
+            </Select>,
           )}
         </FormItem>
         <FormItem label="thrift服务名称" hasFeedback {...formItemLayout}>
@@ -157,7 +159,7 @@ const modal = ({
                 message: 'thrift服务名称不正确',
               },
             ],
-          })(<Input/>)}
+          })(<Input />)}
         </FormItem>
         <FormItem label="thrift方法名称" hasFeedback {...formItemLayout}>
           {getFieldDecorator('actionName', {
@@ -172,7 +174,7 @@ const modal = ({
                 message: 'thrift方法名称不正确',
               },
             ],
-          })(<Input/>)}
+          })(<Input />)}
         </FormItem>
         <FormItem label="接口文档地址" hasFeedback {...formItemLayout}>
           {getFieldDecorator('docUrl', {
@@ -187,7 +189,7 @@ const modal = ({
                 message: '接口文档地址不正确',
               },
             ],
-          })(<Input.TextArea/>)}
+          })(<Input.TextArea />)}
         </FormItem>
       </Form>
     </Modal>

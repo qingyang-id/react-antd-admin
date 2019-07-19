@@ -8,10 +8,13 @@ import { message } from 'antd';
 // import { YQL, CORS } from '../config';
 
 const fetch = (options) => {
-  let {
+  const {
     method = 'get',
-    data,
     fetchType,
+  } = options;
+
+  let {
+    data,
     url,
   } = options;
 
@@ -25,7 +28,8 @@ const fetch = (options) => {
     }
     const match = pathToRegexp.parse(url);
     url = pathToRegexp.compile(url)(data);
-    for (let item of match) {
+    for (const item of match) {
+      // eslint-disable-next-line
       if (item instanceof Object && item.name in cloneData) {
         delete cloneData[item.name];
       }
@@ -48,7 +52,7 @@ const fetch = (options) => {
         resolve({ statusText: 'OK', status: 200, data: result });
       });
     });
-  } else if (fetchType === 'YQL') {
+  } if (fetchType === 'YQL') {
     url = `http://query.yahooapis.com/v1/public/yql?q=select
      * from json where url='${options.url}?${encodeURIComponent(qs.stringify(options.data))}'&format=json`;
     data = null;
@@ -84,7 +88,7 @@ export default function request(options) {
       // } else if (YQL && YQL.indexOf(origin) > -1) {
       //   options.fetchType = 'YQL';
       // } else {
-        options.fetchType = 'JSONP';
+      options.fetchType = 'JSONP';
       // }
     }
   }

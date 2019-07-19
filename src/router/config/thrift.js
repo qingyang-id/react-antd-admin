@@ -40,5 +40,5 @@ export const THRIFT_DIR = {
       icon: 'file',
       component: ThriftFileList,
     },
-  ]
+  ],
 };

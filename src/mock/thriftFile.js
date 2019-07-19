@@ -6,7 +6,7 @@
 
 import Mock from 'mockjs';
 import { queryParse } from '../utils';
-import { queryThriftFileListApi, uploadThriftFileApi, } from '../config/api';
+import { queryThriftFileListApi, uploadThriftFileApi } from '../config/api';
 
 const listData = Mock.mock({
   'data|20-50': [
@@ -21,7 +21,7 @@ const listData = Mock.mock({
 });
 
 
-let database = listData.data;
+const database = listData.data;
 
 export default () => {
   // 查询列表(含count)
@@ -36,7 +36,9 @@ export default () => {
         query = {};
       }
     }
-    let { pageSize, page, sorts, ...other } = query;
+    let {
+      pageSize, page, sorts, ...other
+    } = query;
     pageSize = pageSize || 10;
     page = page || 1;
     let newData = database;
@@ -46,10 +48,10 @@ export default () => {
           if (key === 'keyword' && other[key]) {
             // 关键字筛选
             return item.name.toLowerCase().includes(other[key].toLowerCase());
-          } else if (key === 'startTime' && other[key]) {
+          } if (key === 'startTime' && other[key]) {
             // 开始时间筛选
             return new Date(item.createTime) >= new Date(other[key]);
-          } else if (key === 'endTime' && other[key]) {
+          } if (key === 'endTime' && other[key]) {
             // 截止时间筛选
             return new Date(item.createTime) <= new Date(other[key]);
           }
@@ -91,7 +93,7 @@ export default () => {
       data: {
         list: newData.slice((page - 1) * pageSize, page * pageSize),
         total: newData.length,
-      }
+      },
     });
   });
   // 上传文件api

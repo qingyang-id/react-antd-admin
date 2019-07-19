@@ -20,5 +20,5 @@ export const SERVER_DIR = {
       path: '/home/servers/logs',
       component: ServerList,
     },
-  ]
+  ],
 };

@@ -1,29 +1,29 @@
-import React from 'react'
-import { Provider } from 'react-redux'
+import React from 'react';
+import { Provider } from 'react-redux';
 
 // import { ConnectedRouter } from 'react-router-redux' // push
-import { ConnectedRouter } from 'connected-react-router'
+import { ConnectedRouter } from 'connected-react-router';
 
-import { renderRoutes } from 'react-router-config'
+import { renderRoutes } from 'react-router-config';
 
-import rootRoutes from '../../../router'
+import rootRoutes from '../../../router';
 
 class Root extends React.Component {
-    render () {
-        const { store } = this.props
-        const { history } = this.props
-        // const { isLogin } = this.props
+  render() {
+    const { store } = this.props;
+    const { history } = this.props;
+    // const { isLogin } = this.props
 
-        return (
-            <Provider store={store}>
-                <ConnectedRouter history={ history }>
-                    <div style={{ height: '100%' }}>
-                        { renderRoutes(rootRoutes) }
-                    </div>
-                </ConnectedRouter>
-            </Provider>
-        )
-    }
+    return (
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <div style={{ height: '100%' }}>
+            {renderRoutes(rootRoutes)}
+          </div>
+        </ConnectedRouter>
+      </Provider>
+    );
+  }
 }
 
-export default Root
+export default Root;

@@ -10,12 +10,12 @@ export const RECEIVE_DATA = 'RECEIVE_DATA';
 
 export const TOGGLE_ORDER_DETAIL = 'TOGGLE_ORDER_DETAIL';
 
-//设置menu菜单选中
+// 设置menu菜单选中
 export const DEFAULTITEM = 'DEFAULTITEM';
 export const OPENKEYS = 'OPENKEYS';
 export const MENUFOLD = 'MENUFOLD';
 
-//设置menu菜单选中
+// 设置menu菜单选中
 export const SHOWMODAL = 'user/showModal';
 export const HIDEMODAL = 'user/hideModal';
 export const SWITCHISMOTION = 'user/switchIsMotion';

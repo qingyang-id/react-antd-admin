@@ -3,7 +3,9 @@
  * @author      yq
  * @date        2017-10-19 14:56:47
  */
-import { UPDATE_STATE, QUERY_SUCCESS, SHOW_MODAL, HIDE_MODAL, } from '../types/thriftFile';
+import {
+  UPDATE_STATE, QUERY_SUCCESS, SHOW_MODAL, HIDE_MODAL,
+} from '../types/thriftFile';
 
 const thriftFileReducer = (state = {
   // 列表数据

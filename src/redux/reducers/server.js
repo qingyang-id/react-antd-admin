@@ -4,7 +4,9 @@
  * @date        2017-10-19 14:56:35
  */
 
-import { UPDATE_STATE, QUERY_SUCCESS, SHOW_MODAL, HIDE_MODAL, } from '../types/server';
+import {
+  UPDATE_STATE, QUERY_SUCCESS, SHOW_MODAL, HIDE_MODAL,
+} from '../types/server';
 
 const serverReducer = (state = {
   // 列表数据

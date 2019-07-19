@@ -20,7 +20,7 @@ const initialState = {
       title: '引导页',
       key: '1',
       path: '/home/guide',
-      icon: 'flag'
+      icon: 'flag',
     },
     {
       id: '10',
@@ -54,7 +54,7 @@ const initialState = {
           icon: 'file',
           ancestor: ['thrift'],
         },
-      ]
+      ],
     },
     {
       id: '20',
@@ -70,7 +70,7 @@ const initialState = {
           path: '/home/servers/logs',
           ancestor: ['thrift'],
         },
-      ]
+      ],
     },
     {
       id: '30',
@@ -86,7 +86,7 @@ const initialState = {
           path: '/home/ui/editor',
           icon: 'rocket',
         },
-      ]
+      ],
     },
   ],
   openKeys: [],
@@ -97,12 +97,10 @@ const initialState = {
   isNavbar: document.body.clientWidth < 769,
 };
 
-const updateState = (state, { payload }) => {
-  return {
-    ...state,
-    ...payload,
-  };
-};
+const updateState = (state, { payload }) => ({
+  ...state,
+  ...payload,
+});
 
 const collapseMenu = (state) => {
   window.localStorage.setItem(`${systemPrefix}-COLLAPSED`, !state.collapsed);
@@ -120,12 +118,10 @@ const switchTheme = (state) => {
   };
 };
 
-const switchMenuPopover = (state) => {
-  return {
-    ...state,
-    menuPopoverVisible: !state.menuPopoverVisible,
-  };
-};
+const switchMenuPopover = state => ({
+  ...state,
+  menuPopoverVisible: !state.menuPopoverVisible,
+});
 
 const app = (state = initialState, action) => {
   switch (action.type) {

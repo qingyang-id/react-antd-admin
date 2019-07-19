@@ -3,8 +3,10 @@
  * @author yq
  * @date 2017/9/8 下午4:33
  */
-import { UPDATE_API_STATE, DELETE_SUCCESS, QUERY_SUCCESS,
-  BATCH_DELETE_SUCCESS, SHOW_MODAL, HIDE_MODAL, } from '../types/api.js';
+import {
+  UPDATE_API_STATE, DELETE_SUCCESS, QUERY_SUCCESS,
+  BATCH_DELETE_SUCCESS, SHOW_MODAL, HIDE_MODAL,
+} from '../types/api.js';
 
 const userReducer = (state = {
   // 列表数据
@@ -54,5 +56,5 @@ const userReducer = (state = {
   }
 };
 export default userReducer;
-export const getApp = (state) => state.app;
-export const getPagination = (state) => getApp(state).pagination;
+export const getApp = state => state.app;
+export const getPagination = state => getApp(state).pagination;

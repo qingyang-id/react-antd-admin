@@ -3,8 +3,11 @@
  * @author yq
  * @date 2017/9/10 下午2:26
  */
-import { put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
-import { QUERY_SUCCESS, QUERY_LIST, UPDATE, UPDATE_API_STATUS, CREATE, DELETE, BATCH_DELETE, UPDATE_API_STATE,
+import {
+  put, call, fork, takeLatest,
+} from 'redux-saga/effects';
+import {
+  QUERY_SUCCESS, QUERY_LIST, UPDATE, UPDATE_API_STATUS, CREATE, DELETE, BATCH_DELETE, UPDATE_API_STATE,
 } from '../types/api';
 import { UPDATE_STATE, HANDLE_SUCCESS, HANDLE_FAILED } from '../types/app';
 import * as ApiService from '../../services/api';
@@ -21,7 +24,7 @@ function* doCreate(action) {
     // 新增操作
     yield call(ApiService.create, action.payload);
     // 隐藏模态框
-    yield put({ type: UPDATE_API_STATE, payload: { modalVisible: false, } });
+    yield put({ type: UPDATE_API_STATE, payload: { modalVisible: false } });
     // 显示修改成功
     yield put({ type: HANDLE_SUCCESS, payload: { msg: '新增成功' } });
     // 成功回调
@@ -113,7 +116,7 @@ function* doQueryList(action) {
           pageSize: Number(action.payload.pageSize || 10),
           total: response.data.total,
         },
-      }
+      },
     });
   } catch (error) {
     console.error('查询列表失败：', error);
@@ -138,7 +141,7 @@ function* doUpdate(action) {
     // 更新操作
     yield call(ApiService.update, action.payload);
     // 隐藏模态框
-    yield put({ type: UPDATE_API_STATE, payload: { modalVisible: false, } });
+    yield put({ type: UPDATE_API_STATE, payload: { modalVisible: false } });
     // 显示修改成功
     yield put({ type: HANDLE_SUCCESS, payload: { msg: '修改成功' } });
     // 成功回调

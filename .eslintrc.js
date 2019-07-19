@@ -17,7 +17,6 @@ module.exports = {
     'ecmaVersion': 8,
     'ecmaFeatures': {
       'jsx': true,
-      'experimentalObjectRestSpread': true
     }
   },
   'plugins': [
@@ -59,6 +58,14 @@ module.exports = {
     'no-param-reassign': 0,
     // 允许嵌套三元表达式
     'no-nested-ternary': 0,
+    // 允许无用的构造函数
+    'no-useless-constructor': 0,
+    // 允许图片不存在alt
+    'a11y-img-has-alt': 0,
+    // 关闭超链接检查
+    'jsx-a11y/anchor-is-valid': 'off',
+    // 关闭img标签检查
+    'jsx-a11y/alt-text': 'off',
     // 允许不存在默认的抛出
     'import/prefer-default-export': 0,
     // allow optionalDependencies

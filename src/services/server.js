@@ -3,7 +3,7 @@
  * @author      yq
  * @date        2017-10-19 13:21:22
  */
-import { queryRestartApiLogListApi, restartApiServerApi, } from '../config/api';
+import { queryRestartApiLogListApi, restartApiServerApi } from '../config/api';
 import HttpUtil from '../utils/httpUtil';
 
 /**
@@ -15,19 +15,15 @@ import HttpUtil from '../utils/httpUtil';
  *        }
  * @returns {*}
  */
-export const queryList = (query) => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-    query,
-  }, queryRestartApiLogListApi));
-};
+export const queryList = query => HttpUtil.send(Object.assign({
+  encode: false,
+  query,
+}, queryRestartApiLogListApi));
 
 /**
  * 重启API服务
  * @returns {*}
  */
-export const restartApiServer = () => {
-  return HttpUtil.send(Object.assign({
-    encode: false,
-  }, restartApiServerApi));
-};
+export const restartApiServer = () => HttpUtil.send(Object.assign({
+  encode: false,
+}, restartApiServerApi));

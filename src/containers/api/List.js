@@ -4,7 +4,7 @@ import { Table, Modal, Icon } from 'antd';
 import { DropOption } from '../../components/base';
 import './List.less';
 
-const confirm = Modal.confirm;
+const { confirm } = Modal;
 
 /**
  * 格式化状态
@@ -12,19 +12,21 @@ const confirm = Modal.confirm;
  * @returns {*}
  */
 function formatStatus(status = 0) {
-  switch(status) {
+  switch (status) {
     case 1:
-      return <Icon type="check-circle-o" style={{ fontSize: 16, fontWeight: 'bold', color: '#6cc788' }}/>;
+      return <Icon type="check-circle-o" style={{ fontSize: 16, fontWeight: 'bold', color: '#6cc788' }} />;
     case -1:
-      return <Icon type="close-circle-o" style={{ fontSize: 16, fontWeight: 'bold', color: '#f44455' }}/>;
+      return <Icon type="close-circle-o" style={{ fontSize: 16, fontWeight: 'bold', color: '#f44455' }} />;
     case -10:
-      return <Icon type="delete" style={{ fontSize: 16, fontWeight: 'bold', color: '#424242' }}/>;
+      return <Icon type="delete" style={{ fontSize: 16, fontWeight: 'bold', color: '#424242' }} />;
     default:
       return '-';
   }
 }
 
-const List = ({ updateItemStatus, onDeleteItem, onEditItem, ...tableProps }) => {
+const List = ({
+  updateItemStatus, onDeleteItem, onEditItem, ...tableProps
+}) => {
   const handleMenuClick = (record, e) => {
     if (e.key === '1') {
       onEditItem(record);
@@ -63,8 +65,9 @@ const List = ({ updateItemStatus, onDeleteItem, onEditItem, ...tableProps }) => 
       dataIndex: 'path',
       key: 'path',
       sorter: true,
-      render: (text, record) => record.docUrl ? <a href={`${record.docUrl}`} target='_blank'>{text}</a>
-        : text,
+      render: (text, record) => (record.docUrl ?
+        <a href={`${record.docUrl}`} target="_blank" rel="noopener noreferrer">{text}</a>
+        : text),
     },
     {
       title: '请求方式',
@@ -91,9 +94,13 @@ const List = ({ updateItemStatus, onDeleteItem, onEditItem, ...tableProps }) => 
       title: '角色',
       dataIndex: 'role',
       key: 'role',
-      render: text => (<span>{text === 1
-        ? '登录'
-        : '-'}</span>),
+      render: text => (
+        <span>
+          {text === 1
+            ? '登录'
+            : '-'}
+        </span>
+      ),
     },
     {
       title: '状态',
@@ -117,16 +124,18 @@ const List = ({ updateItemStatus, onDeleteItem, onEditItem, ...tableProps }) => 
       title: '操作',
       key: 'operation',
       width: 100,
-      render: (text, record) => {
-        return <DropOption onMenuClick={e => handleMenuClick(record, e)}
-                           menuOptions={[{
-                            key: '1',
-                            name: '修改'
-                          }, {
-                            key: '2',
-                            name: (record.status === 1) ? '禁用' : '启用'
-                          }]}/>;
-      },
+      render: (text, record) => (
+        <DropOption
+          onMenuClick={e => handleMenuClick(record, e)}
+          menuOptions={[{
+            key: '1',
+            name: '修改',
+          }, {
+            key: '2',
+            name: (record.status === 1) ? '禁用' : '启用',
+          }]}
+        />
+      ),
     },
   ];
 
@@ -134,7 +143,7 @@ const List = ({ updateItemStatus, onDeleteItem, onEditItem, ...tableProps }) => 
     <div>
       <Table
         {...tableProps}
-        className='table'
+        className="table"
         bordered
         scroll={{ x: 1250 }}
         columns={columns}

@@ -3,9 +3,12 @@
  * @author      yq
  * @date        2017-10-16 17:09:54
  */
-import { put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects';
-import { QUERY_SUCCESS, QUERY, QUERY_LIST, UPDATE, UPDATE_THRIFT_STATUS,
- CREATE, DELETE, BATCH_DELETE, UPDATE_THRIFT_STATE,
+import {
+  put, call, fork, takeLatest,
+} from 'redux-saga/effects';
+import {
+  QUERY_SUCCESS, QUERY, QUERY_LIST, UPDATE, UPDATE_THRIFT_STATUS,
+  CREATE, DELETE, BATCH_DELETE, UPDATE_THRIFT_STATE,
 } from '../types/thrift';
 import { UPDATE_STATE, HANDLE_SUCCESS, HANDLE_FAILED } from '../types/app';
 import * as ThriftService from '../../services/thrift';
@@ -22,7 +25,7 @@ function* doCreate(action) {
     // 新增操作
     yield call(ThriftService.create, action.payload);
     // 隐藏模态框
-    yield put({ type: UPDATE_THRIFT_STATE, payload: { modalVisible: false, } });
+    yield put({ type: UPDATE_THRIFT_STATE, payload: { modalVisible: false } });
     // 显示修改成功
     yield put({ type: HANDLE_SUCCESS, payload: { msg: '新增成功' } });
     // 成功回调
@@ -109,7 +112,7 @@ function* doQuery(action) {
       type: UPDATE_THRIFT_STATE,
       payload: {
         thrifts: response.data,
-      }
+      },
     });
   } catch (error) {
     console.error('查询列表失败：', error);
@@ -141,7 +144,7 @@ function* doQueryList(action) {
           pageSize: Number(action.payload.pageSize || 10),
           total: response.data.total,
         },
-      }
+      },
     });
   } catch (error) {
     console.error('查询列表失败：', error);
@@ -166,7 +169,7 @@ function* doUpdate(action) {
     // 更新操作
     yield call(ThriftService.update, action.payload);
     // 隐藏模态框
-    yield put({ type: UPDATE_THRIFT_STATE, payload: { modalVisible: false, } });
+    yield put({ type: UPDATE_THRIFT_STATE, payload: { modalVisible: false } });
     // 显示修改成功
     yield put({ type: HANDLE_SUCCESS, payload: { msg: '修改成功' } });
     // 成功回调

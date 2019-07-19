@@ -5,7 +5,9 @@
  */
 
 import Mock from 'mockjs';
-import { queryApis, createApi, updateApi, removeApi, batchRemoveApi, updateApiStatus, } from '../config/api';
+import {
+  queryApis, createApi, updateApi, removeApi, batchRemoveApi, updateApiStatus,
+} from '../config/api';
 
 const listData = Mock.mock({
   'data|80-100': [
@@ -51,15 +53,15 @@ export default () => {
     pageSize = pageSize || 10;
     page = page || 1;
     let newData = database;
-    for (let key in other) {
+    for (const key in other) {
       if ({}.hasOwnProperty.call(other, key)) {
         newData = newData.filter((item) => {
           if ({}.hasOwnProperty.call(item, key)) {
             if (key === 'status') {
               return item.status.toString() === other[key];
-            } else if (key === 'keyword') {
+            } if (key === 'keyword') {
               return other[key].every(iitem => item[key].indexOf(iitem) > -1);
-            } else if (key === 'startTime') {
+            } if (key === 'startTime') {
               const start = new Date(other[key][0]).getTime();
               const end = new Date(other[key][1]).getTime();
               const now = new Date(item[key]).getTime();
@@ -81,7 +83,7 @@ export default () => {
       data: {
         list: newData.slice((page - 1) * pageSize, page * pageSize),
         total: newData.length,
-      }
+      },
     });
   });
   // 启停用
@@ -96,11 +98,11 @@ export default () => {
         body = {};
       }
     }
-    let { id, status } = body;
+    const { id, status } = body;
     const editItem = {
       id,
       status,
-      updateTime: Mock.mock('@now')
+      updateTime: Mock.mock('@now'),
     };
     let isExist = false;
     database = database.map((item) => {
@@ -133,9 +135,13 @@ export default () => {
         body = {};
       }
     }
-    let { name, path, method, role, thriftName, serviceName, actionName } = body;
+    const {
+      name, path, method, role, thriftName, serviceName, actionName,
+    } = body;
     // const { id } = req.params;
-    const editItem = { name, path, method, role, thriftName, serviceName, actionName };
+    const editItem = {
+      name, path, method, role, thriftName, serviceName, actionName,
+    };
     const id = options.url.match('[0-9]+$')[0];
     let isExist = false;
     let repeatData;
@@ -177,7 +183,7 @@ export default () => {
         body = {};
       }
     }
-    let newData = body;
+    const newData = body;
     const oldApi = database.find(item => (item.path === newData.path) && (item.method === newData.method));
     if (oldApi) {
       return {

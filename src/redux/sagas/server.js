@@ -3,8 +3,12 @@
  * @author      yq
  * @date        2017-10-19 14:36:18
  */
-import { put, call, fork, takeLatest } from 'redux-saga/effects';
-import { RESTART_API_SERVER, QUERY_LIST, QUERY_SUCCESS, UPDATE_STATE as UPDATE_SERVER_STATE, } from '../types/server';
+import {
+  put, call, fork, takeLatest,
+} from 'redux-saga/effects';
+import {
+  RESTART_API_SERVER, QUERY_LIST, QUERY_SUCCESS, UPDATE_STATE as UPDATE_SERVER_STATE,
+} from '../types/server';
 import { UPDATE_STATE, HANDLE_SUCCESS } from '../types/app';
 import * as ServerService from '../../services/server';
 
@@ -26,7 +30,7 @@ function* doQueryList(action) {
           pageSize: Number(action.payload.pageSize || 10),
           total: response.data.total,
         },
-      }
+      },
     });
   } catch (error) {
     console.error('查询列表失败：', error);

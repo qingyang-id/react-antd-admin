@@ -3,7 +3,6 @@
  * @author yq
  * @date 2017/9/14 上午10:43
  */
-/* global location */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu, Icon } from 'antd';
@@ -26,7 +25,6 @@ class MenuCustom extends React.Component {
     // 匹配当前路由
     const menus = this.props.menus;
     let currentRoute = this.findRouterByPath(menus, this.props.history.location.pathname);
-    console.warn('\n\n\ncurrentRoute---', currentRoute);
     let parentRoute;
     const openKeys = [];
     let selectedKeys = [];
@@ -71,7 +69,6 @@ class MenuCustom extends React.Component {
   // 递归生成菜单
   getMenus(globalDirN) {
     const levelMap = this.state.levelMap;
-    const collapsed = this.props.collapsed;
     return globalDirN.map((item) => {
       if (item.children) {
         if (item.pid) {
@@ -129,7 +126,6 @@ class MenuCustom extends React.Component {
   };
 
   onOpenChange = (openKeys) => {
-    console.warn('\n\n\n\nopenKeys changge----', openKeys);
     const navOpenKeys = this.props.openKeys || [];
     const latestOpenKey = openKeys.find(key => !navOpenKeys.includes(key));
     const latestCloseKey = navOpenKeys.find(key => !openKeys.includes(key));
