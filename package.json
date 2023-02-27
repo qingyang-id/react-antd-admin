@@ -81,7 +81,7 @@
     "file-loader": "^4.0.0",
     "flow-bin": "^0.50.0",
     "fs-extra": "^3.0.1",
-    "happypack": "3.1.0",
+    "happypack": "5.0.1",
     "hotcss": "^2.2.1",
     "html-webpack-plugin": "^4.0.0-beta.7",
     "html-webpack-template": "^5.6.0",
